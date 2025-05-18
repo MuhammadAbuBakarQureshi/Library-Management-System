@@ -45,12 +45,12 @@ void MainMenu::windowLoop()
     sf::Color button_color = sf::Color(10, 10, 50);
     sf::Color text_color = sf::Color(192, 192, 192);
 
-    Button start_game("Start Game");
+    Button start_game("All Books");
     start_game.setColors(sf::Color(button_color), sf::Color(text_color));
     start_game.setButtonPosition(sf::Vector2f(370, 230));
     start_game.setTextPosition(sf::Vector2f(430, 255));
 
-    Button high_score("High Scores");
+    Button high_score("Search Book");
     high_score.setColors(sf::Color(button_color), sf::Color(text_color));
     high_score.setButtonPosition(sf::Vector2f(370, 400));
     high_score.setTextPosition(sf::Vector2f(450, 425));
@@ -103,11 +103,7 @@ void MainMenu::updateTitle()
 
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 
-    /*cout << desktop.height << "\t" << desktop.width << endl;*/
-
     int width = desktop.width / 4;
-
-    cout << width << endl;
 
     text.move(width, 100);
 
