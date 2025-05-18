@@ -45,15 +45,15 @@ void MainMenu::windowLoop()
     sf::Color button_color = sf::Color(10, 10, 50);
     sf::Color text_color = sf::Color(192, 192, 192);
 
-    Button start_game("All Books");
-    start_game.setColors(sf::Color(button_color), sf::Color(text_color));
-    start_game.setButtonPosition(sf::Vector2f(370, 230));
-    start_game.setTextPosition(sf::Vector2f(430, 255));
+    Button all_books("All Books");
+    all_books.setColors(sf::Color(button_color), sf::Color(text_color));
+    all_books.setButtonPosition(sf::Vector2f(370, 230));
+    all_books.setTextPosition(sf::Vector2f(430, 255));
 
-    Button high_score("Search Book");
-    high_score.setColors(sf::Color(button_color), sf::Color(text_color));
-    high_score.setButtonPosition(sf::Vector2f(370, 400));
-    high_score.setTextPosition(sf::Vector2f(450, 425));
+    Button search_book("Search Book");
+    search_book.setColors(sf::Color(button_color), sf::Color(text_color));
+    search_book.setButtonPosition(sf::Vector2f(370, 400));
+    search_book.setTextPosition(sf::Vector2f(450, 425));
 
     Button exit("Exit");
     exit.setColors(sf::Color(button_color), sf::Color(text_color));
@@ -73,12 +73,12 @@ void MainMenu::windowLoop()
             }
         }
 
-        if (start_game.isClick(*window, evnt)) {
+        if (all_books.isClick(*window, evnt)) {
 
             this->window->close();
         }
 
-        if (high_score.isClick(*window, evnt)) {
+        if (search_book.isClick(*window, evnt)) {
 
             this->window->close();
         }
@@ -90,8 +90,8 @@ void MainMenu::windowLoop()
 
         this->window->clear(sf::Color(0, 31, 63));
         updateTitle();
-        start_game.render(*window);
-        high_score.render(*window);
+        all_books.render(*window);
+        search_book.render(*window);
         exit.render(*window);
         this->window->display();
     }
