@@ -1,11 +1,11 @@
 #include <SFML/Graphics.hpp>
-#include "Main Menu/MainMenu.h"
+#include "Window/window.h"
 
 int main()
 {
-
-	MainMenu main;
-	main.windowLoop();
+	
+	Window window;
+	window.windowLoop();
 
 	return 0;
 }
