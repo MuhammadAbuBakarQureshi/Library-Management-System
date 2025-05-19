@@ -11,7 +11,7 @@ public:
 	sf::VideoMode video_mode;
 	sf::Event evnt;
 
-	SignUp(sf::RenderWindow*, sf::VideoMode, sf::Event);
+	SignUp(sf::RenderWindow*, sf::Event);
 
 	void renderSignupForm();
 };
