@@ -4,10 +4,9 @@
 
 // Constructor
 
-SignUp::SignUp(sf::RenderWindow* window, sf::VideoMode video_mode, sf::Event evnt) {
+SignUp::SignUp(sf::RenderWindow* window, sf::Event evnt) {
 
 	this->window = window;
-	this->video_mode = video_mode;
 	this->evnt = evnt;
 }
 
@@ -19,12 +18,12 @@ void SignUp::renderSignupForm() {
 
 	Button signUp("Sign Up");
 	signUp.setColors(sf::Color(button_color), sf::Color(text_color));
-	signUp.setButtonPosition(sf::Vector2f(370, 230));
-	signUp.setTextPosition(sf::Vector2f(430, 255));
+	signUp.setButtonPosition(sf::Vector2f(370, 630));
+	signUp.setTextPosition(sf::Vector2f(430, 655));
 
-	bool isRegistered = true;
+	bool isRegistered = false;
 
-	while (isRegistered) {
+	while (!isRegistered) {
 	
 		while (this->window->pollEvent(evnt)) {
 
