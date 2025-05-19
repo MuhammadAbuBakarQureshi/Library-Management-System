@@ -18,7 +18,13 @@
     <ClCompile Include="Library-Management-System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main Menu\MainMenu.cpp">
+    <ClCompile Include="Window\window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Signup Login\Signup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Signup Login\authentication.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Button\Button.cpp">
@@ -26,7 +32,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Main Menu\MainMenu.h">
+    <ClInclude Include="Window\window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Signup Login\Signup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Signup Login\authentication.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Signup Login\Buttons\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Button\Button.h">
