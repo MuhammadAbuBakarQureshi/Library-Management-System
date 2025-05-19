@@ -47,8 +47,9 @@ void Window::windowLoop() {
 				break;
 			}
 
-			Authentication auth(this->window, this->evnt);
-			auth.authenticationOptions();
+			Authentication authentication(this->window, this->evnt);
+			authentication.authenticationOptions();
+
 		}
 	}
 }
