@@ -137,11 +137,16 @@
   <ItemGroup>
     <ClCompile Include="Button\Button.cpp" />
     <ClCompile Include="Library-Management-System.cpp" />
-    <ClCompile Include="Main Menu\MainMenu.cpp" />
+    <ClCompile Include="Signup Login\authentication.cpp" />
+    <ClCompile Include="Signup Login\Signup.cpp" />
+    <ClCompile Include="Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button\Button.h" />
-    <ClInclude Include="Main Menu\MainMenu.h" />
+    <ClInclude Include="Signup Login\authentication.h" />
+    <ClInclude Include="Signup Login\Buttons\Button.h" />
+    <ClInclude Include="Signup Login\Signup.h" />
+    <ClInclude Include="Window\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
