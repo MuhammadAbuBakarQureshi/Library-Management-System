@@ -2,6 +2,8 @@
 
 #include "../Button/Button.h"
 
+#include "../Signup Login/Signup.h"
+
 #include <iostream>
 
 Authentication::Authentication(sf::RenderWindow* window, sf::Event evnt) {
@@ -47,7 +49,8 @@ void Authentication::authenticationOptions()
 
 		if (signUp.isClick(*this->window, this->evnt)) {
 
-			cout << "SignUp" << endl;
+			SignUp userSignUp(this->window, this->evnt);
+			userSignUp.renderSignupForm();
 		}
 
 		if (login.isClick(*this->window, this->evnt)) {
