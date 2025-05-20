@@ -18,33 +18,39 @@
     <ClCompile Include="Library-Management-System.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Window\window.cpp">
+    <ClCompile Include="Login-Registration\Keys\Keys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Signup Login\Signup.cpp">
+    <ClCompile Include="Login-Registration\Main Menu\Data-Structure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Signup Login\authentication.cpp">
+    <ClCompile Include="Login-Registration\Main Menu\Main_Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Button\Button.cpp">
+    <ClCompile Include="Login-Registration\Registration\Registration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Books\Books.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Window\window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Signup Login\Signup.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Signup Login\authentication.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Signup Login\Buttons\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Button\Button.h">
+    <ClInclude Include="Login-Registration\Keys\key.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Login-Registration\Main Menu\Main_Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Login-Registration\Registration\Registration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Books\Book.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Books\Books.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
