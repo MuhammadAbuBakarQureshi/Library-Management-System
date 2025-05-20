@@ -135,18 +135,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Button\Button.cpp" />
+    <ClCompile Include="Books\Books.cpp" />
     <ClCompile Include="Library-Management-System.cpp" />
-    <ClCompile Include="Signup Login\authentication.cpp" />
-    <ClCompile Include="Signup Login\Signup.cpp" />
-    <ClCompile Include="Window\window.cpp" />
+    <ClCompile Include="Login-Registration\Keys\Keys.cpp" />
+    <ClCompile Include="Login-Registration\Main Menu\Data-Structure.cpp" />
+    <ClCompile Include="Login-Registration\Main Menu\Main_Menu.cpp" />
+    <ClCompile Include="Login-Registration\Registration\Registration.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Button\Button.h" />
-    <ClInclude Include="Signup Login\authentication.h" />
+    <ClInclude Include="Books\Book.h" />
+    <ClInclude Include="Books\Books.h" />
+    <ClInclude Include="Login-Registration\Keys\key.h" />
+    <ClInclude Include="Login-Registration\Main Menu\Main_Menu.h" />
+    <ClInclude Include="Login-Registration\Registration\Registration.h" />
     <ClInclude Include="Signup Login\Buttons\Button.h" />
-    <ClInclude Include="Signup Login\Signup.h" />
-    <ClInclude Include="Window\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
