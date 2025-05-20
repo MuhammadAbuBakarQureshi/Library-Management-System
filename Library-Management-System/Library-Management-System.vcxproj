@@ -138,16 +138,18 @@
     <ClCompile Include="Books\Books.cpp" />
     <ClCompile Include="Library-Management-System.cpp" />
     <ClCompile Include="Login-Registration\Keys\Keys.cpp" />
-    <ClCompile Include="Login-Registration\Main Menu\Data-Structure.cpp" />
-    <ClCompile Include="Login-Registration\Main Menu\Main_Menu.cpp" />
+    <ClCompile Include="Login-Registration\Login-Registration\Data-Structure.cpp" />
+    <ClCompile Include="Login-Registration\Login-Registration\Login-Registration.cpp" />
     <ClCompile Include="Login-Registration\Registration\Registration.cpp" />
+    <ClCompile Include="Main Menu\Main-Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Books\Book.h" />
     <ClInclude Include="Books\Books.h" />
     <ClInclude Include="Login-Registration\Keys\key.h" />
-    <ClInclude Include="Login-Registration\Main Menu\Main_Menu.h" />
+    <ClInclude Include="Login-Registration\Login-Registration\Login-Registration.h" />
     <ClInclude Include="Login-Registration\Registration\Registration.h" />
+    <ClInclude Include="Main Menu\Main-Menu.h" />
     <ClInclude Include="Signup Login\Buttons\Button.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
