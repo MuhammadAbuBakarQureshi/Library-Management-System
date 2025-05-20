@@ -21,16 +21,19 @@
     <ClCompile Include="Login-Registration\Keys\Keys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Login-Registration\Main Menu\Data-Structure.cpp">
+    <ClCompile Include="Login-Registration\Login-Registration\Data-Structure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Login-Registration\Main Menu\Main_Menu.cpp">
+    <ClCompile Include="Login-Registration\Login-Registration\Login-Registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Login-Registration\Registration\Registration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Books\Books.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main Menu\Main-Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +44,7 @@
     <ClInclude Include="Login-Registration\Keys\key.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Login-Registration\Main Menu\Main_Menu.h">
+    <ClInclude Include="Login-Registration\Login-Registration\Login-Registration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Login-Registration\Registration\Registration.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Books\Books.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main Menu\Main-Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
