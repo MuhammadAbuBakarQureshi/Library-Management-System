@@ -142,15 +142,16 @@
     <ClCompile Include="Login-Registration\Login-Registration\Login-Registration.cpp" />
     <ClCompile Include="Login-Registration\Registration\Registration.cpp" />
     <ClCompile Include="Main Menu\Main-Menu.cpp" />
+    <ClCompile Include="User Main Menu\User Main Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Books\Book.h" />
     <ClInclude Include="Books\Books.h" />
     <ClInclude Include="Login-Registration\Keys\key.h" />
     <ClInclude Include="Login-Registration\Login-Registration\Login-Registration.h" />
     <ClInclude Include="Login-Registration\Registration\Registration.h" />
     <ClInclude Include="Main Menu\Main-Menu.h" />
     <ClInclude Include="Signup Login\Buttons\Button.h" />
+    <ClInclude Include="User Main Menu\User-Main-Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
