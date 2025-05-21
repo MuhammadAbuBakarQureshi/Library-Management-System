@@ -36,6 +36,9 @@
     <ClCompile Include="Main Menu\Main-Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="User Main Menu\User Main Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Signup Login\Buttons\Button.h">
@@ -50,13 +53,13 @@
     <ClInclude Include="Login-Registration\Registration\Registration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Books\Book.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Books\Books.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Main Menu\Main-Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="User Main Menu\User-Main-Menu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
