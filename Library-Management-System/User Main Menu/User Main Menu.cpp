@@ -3,13 +3,12 @@
 UserMainMenu::UserMainMenu() {
 
 	this->bookHashTableByID = new  BookHashTableByID();
-	this->bookHashTableByID->read_file();
-
+	this->bookHashTableByID->restoreBooks();
 }
 
 UserMainMenu::~UserMainMenu() {
 
-	this->bookHashTableByID->write_file();
+	this->bookHashTableByID->storeBooks();
 	delete this->bookHashTableByID;
 }
 
