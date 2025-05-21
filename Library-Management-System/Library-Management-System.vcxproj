@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Books\Books.cpp" />
+    <ClCompile Include="Books\Doubly Books\Doubly-Books.cpp" />
     <ClCompile Include="Library-Management-System.cpp" />
     <ClCompile Include="Login-Registration\Keys\Keys.cpp" />
     <ClCompile Include="Login-Registration\Login-Registration\Data-Structure.cpp" />
@@ -146,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Books\Books.h" />
+    <ClInclude Include="Books\Doubly Books\Doubly-Books.h" />
     <ClInclude Include="Login-Registration\Keys\key.h" />
     <ClInclude Include="Login-Registration\Login-Registration\Login-Registration.h" />
     <ClInclude Include="Login-Registration\Registration\Registration.h" />
