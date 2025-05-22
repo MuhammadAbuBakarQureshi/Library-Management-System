@@ -20,7 +20,9 @@ public:
 
     Book* prev;
     Book* next;
-    Book* hashNext;
+    Book* hashNextByID;
+    Book* hashNextByTitle;
+    Book* hashNextByAuthor;
 
     // Constructor
 
