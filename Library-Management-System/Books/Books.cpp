@@ -2,6 +2,8 @@
 #include <string>
 #include <sstream>
 #include <fstream>
+#include <iomanip>
+#include <Windows.h>
 
 #include "Books.h"
 
@@ -77,26 +79,123 @@ void BookHashTableByID::addBookInTable(Book* newBook)
 void BookHashTableByID::listAllBooks()
 {
 
-    for (Book* iterNode = doublyLinkedBooks->tail; iterNode; iterNode = iterNode->prev) {
+        const string HEADER_COLOR = "\033[1;36m";  // Cyan
+        const string RESET_COLOR = "\033[0m";
+        const string LINE_COLOR = "\033[1;37m";    // Light Gray
 
-        cout << iterNode->bookID << "   " 
-            << iterNode->bookTitle << "   " 
-            << iterNode->bookAuthor << "   "
-            << iterNode->summary << "   "
-            << iterNode->genre << "    "
-            << ((iterNode->isAvailable) ? "True" : "False") << "\n" << endl;
-    }
+        const int idWidth = 4;
+        const int titleWidth = 20;
+        const int authorWidth = 15;
+        const int summaryWidth = 40;
+        const int genreWidth = 15;
+        const int availWidth = 10;
+
+        // Print centered heading
+        string heading = "BOOK LISTING";
+        int consoleWidth = 100;
+        int padding = (consoleWidth - heading.length()) / 2;
+        cout << "\n\n" << string(padding, ' ') << HEADER_COLOR << heading << RESET_COLOR << "\n\n";
+
+        // Print top border
+        cout << LINE_COLOR
+            << "+" << string(idWidth + 2, '-')
+            << "+" << string(titleWidth + 2, '-')
+            << "+" << string(authorWidth + 2, '-')
+            << "+" << string(summaryWidth + 2, '-')
+            << "+" << string(genreWidth + 2, '-')
+            << "+" << string(availWidth + 2, '-')
+            << "+" << RESET_COLOR << endl;
+
+        // Print column headers
+        cout << LINE_COLOR
+            << "| " << left << setw(idWidth) << "ID"
+            << " | " << setw(titleWidth) << "Title"
+            << " | " << setw(authorWidth) << "Author"
+            << " | " << setw(summaryWidth) << "Summary"
+            << " | " << setw(genreWidth) << "Genre"
+            << " | " << setw(availWidth) << "Available"
+            << " |" << RESET_COLOR << endl;
+
+        // Print middle border
+        cout << LINE_COLOR
+            << "+" << string(idWidth + 2, '-')
+            << "+" << string(titleWidth + 2, '-')
+            << "+" << string(authorWidth + 2, '-')
+            << "+" << string(summaryWidth + 2, '-')
+            << "+" << string(genreWidth + 2, '-')
+            << "+" << string(availWidth + 2, '-')
+            << "+" << RESET_COLOR << endl;
+
+        // Print all books
+        for (Book* iterNode = doublyLinkedBooks->tail; iterNode; iterNode = iterNode->prev) {
+            auto truncate = [](string str, int width) {
+                return (str.length() > width) ? str.substr(0, width - 3) + "..." : str;
+                };
+
+            string bookID = iterNode->bookID;
+            string title = truncate(iterNode->bookTitle, titleWidth);
+            string author = truncate(iterNode->bookAuthor, authorWidth);
+            string summary = truncate(iterNode->summary, summaryWidth);
+            string genre = truncate(iterNode->genre, genreWidth);
+            string isAvailable = iterNode->isAvailable ? "Yes" : "No";
+
+            cout << "| " << left << setw(idWidth) << bookID
+                << " | " << setw(titleWidth) << title
+                << " | " << setw(authorWidth) << author
+                << " | " << setw(summaryWidth) << summary
+                << " | " << setw(genreWidth) << genre
+                << " | " << setw(availWidth) << isAvailable
+                << " |" << endl;
+        }
+
+
+        // Print bottom border
+        cout << LINE_COLOR
+            << "+" << string(idWidth + 2, '-')
+            << "+" << string(titleWidth + 2, '-')
+            << "+" << string(authorWidth + 2, '-')
+            << "+" << string(summaryWidth + 2, '-')
+            << "+" << string(genreWidth + 2, '-')
+            << "+" << string(availWidth + 2, '-')
+            << "+" << RESET_COLOR << endl;
 }
 
 void BookHashTableByID::listBook(Book* book)
 {
+    if (!book) {
+        cout << "Book not found.\n";
+        return;
+    }
 
-    cout << book->bookID << "   "
-        << book->bookTitle << "   "
-        << book->bookAuthor << "   "
-        << book->summary << "   "
-        << book->genre << "    "
-        << ((book->isAvailable) ? "True" : "False") << "\n" << endl;
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, 11); // Bright cyan for heading
+
+    cout << "\n\n" << setw(40) << "Book Details\n\n";
+
+    SetConsoleTextAttribute(hConsole, 15); // Reset to default
+
+    const int fieldWidth = 20;
+    const int valueWidth = 50;
+    const int totalWidth = fieldWidth + valueWidth + 2; // +2 for the "| " separator
+
+    cout << "" << "\n";
+    cout << std::string(totalWidth, '-') << "\n";
+
+    cout << std::left << std::setw(fieldWidth) << "Book ID"
+        << "| " << setw(valueWidth) << book->bookID << "\n";
+    cout << left << setw(fieldWidth) << "Title"
+        << "| " << setw(valueWidth) << book->bookTitle << "\n";
+    cout << left << setw(fieldWidth) << "Author"
+        << "| " << setw(valueWidth) << book->bookAuthor << "\n";
+    cout << left << setw(fieldWidth) << "Genre"
+        << "| " << setw(valueWidth) << book->genre << "\n";
+    cout << left << setw(fieldWidth) << "Availability"
+        << "| " << setw(valueWidth) << (book->isAvailable ? "Available" : "Not Available") << "\n";
+    cout << string(totalWidth, '-') << "\n";
+
+    // Print summary separately
+    cout << "\nSummary:\n" << book->summary << "\n";
+
 }
 
 Book* BookHashTableByID::searchByID(string bookID)
