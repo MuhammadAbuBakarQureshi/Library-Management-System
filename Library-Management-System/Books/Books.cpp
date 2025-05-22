@@ -437,6 +437,9 @@ void BookHashTableByBookTitle::addBookInTable(Book* newBook)
 
 void BookHashTableByBookTitle::searchByTitle(string bookTitle)
 {
+    BookHashTableByID bookHashTableByID;
+
+    bool isFound = false;
 
     int index = hash_value(bookTitle);
 
@@ -444,17 +447,17 @@ void BookHashTableByBookTitle::searchByTitle(string bookTitle)
 
         if (iterNode->bookTitle == bookTitle) {
 
-            cout << iterNode->bookID << "   "
-                << iterNode->bookTitle << "   "
-                << iterNode->bookAuthor << "   "
-                << iterNode->summary << "   "
-                << iterNode->genre << "    "
-                << ((iterNode->isAvailable) ? "True" : "False") << "\n" << endl;
+            bookHashTableByID.listBook(iterNode);
+
             return;
         }
     }
 
-    cout << "\n\n\n\t\tBook not Found" << endl;
+    if (!isFound) {
+
+        cout << "\n\n\t\tBook Not Found" << endl;
+    }
+
 }
 
 
@@ -498,6 +501,8 @@ void BookHashTableByBookAuthor::addBookInTable(Book* newBook)
 
 void BookHashTableByBookAuthor::searchByAuthor(string bookAuthor)
 {
+    BookHashTableByID bookHashTableByID;
+
     bool isFound = false;
 
     int index = hash_value(bookAuthor);
@@ -506,12 +511,7 @@ void BookHashTableByBookAuthor::searchByAuthor(string bookAuthor)
 
         if (iterNode->bookAuthor == bookAuthor) {
 
-            cout << iterNode->bookID << "   "
-                << iterNode->bookTitle << "   "
-                << iterNode->bookAuthor << "   "
-                << iterNode->summary << "   "
-                << iterNode->genre << "    "
-                << ((iterNode->isAvailable) ? "True" : "False") << "\n" << endl;
+            bookHashTableByID.listBook(iterNode);
 
             isFound = true;
         }
