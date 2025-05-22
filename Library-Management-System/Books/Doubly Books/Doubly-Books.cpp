@@ -11,7 +11,8 @@ Book::Book(string bookID, string bookTitle, string bookAuthor, string summary, s
     this->isAvailable = true; // True by default
     this->prev = nullptr;
     this->next = nullptr;
-    this->hashNext = nullptr;
+    this->hashNextByID = nullptr;
+    this->hashNextByTitle = nullptr;
 }
 
 DoublyLinkedBooks::DoublyLinkedBooks() {
