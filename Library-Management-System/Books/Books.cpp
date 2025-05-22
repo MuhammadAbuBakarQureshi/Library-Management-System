@@ -12,26 +12,45 @@ using namespace std;
 BookHashTableByID::BookHashTableByID()
 {
     this->doublyLinkedBooks = new DoublyLinkedBooks();
+    this->bookHashTableByBookTitle = new BookHashTableByBookTitle();
+    this->bookHashTableByBookAuthor = new BookHashTableByBookAuthor();
 }
 
-void BookHashTableByID::addBook(string bookTitle, string bookAuthor, string summary, string genre)
+BookHashTableByID::~BookHashTableByID()
+{
+    //delete[] bookIDTable;
+    delete bookHashTableByBookTitle;
+    delete doublyLinkedBooks;
+    delete bookHashTableByBookAuthor;
+}
+
+void BookHashTableByID::insertBook(string bookTitle, string bookAuthor, string summary, string genre)
+{
+    Book* newBook = doublyLinkedBooks->insertBook("needed", bookTitle, bookAuthor, summary, genre);
+
+    this->addBookInTable(newBook);
+    this->bookHashTableByBookTitle->addBookInTable(newBook);
+    this->bookHashTableByBookAuthor->addBookInTable(newBook);
+}
+
+void BookHashTableByID::addBookInTable(Book* newBook)
 {
 
-    Book* newBook = doublyLinkedBooks->insertBook("needed", bookTitle, bookAuthor, summary, genre);
+    //Book* newBook = doublyLinkedBooks->insertBook("needed", bookTitle, bookAuthor, summary, genre);
     
     int index = hash_value(newBook->bookID);
 
-    if (bookTable[index] == nullptr) {
+    if (bookIDTable[index] == nullptr) {
 
-        bookTable[index] = newBook;
+        bookIDTable[index] = newBook;
         return;
     }
 
-    for (Book* iterNode = bookTable[index]; iterNode; iterNode = iterNode->hashNext) {
+    for (Book* iterNode = bookIDTable[index]; iterNode; iterNode = iterNode->hashNextByID) {
 
-        if (iterNode->hashNext == nullptr) {
+        if (iterNode->hashNextByID == nullptr) {
 
-            iterNode->hashNext = newBook;
+            iterNode->hashNextByID = newBook;
             return;
         }
     }
@@ -113,23 +132,9 @@ void BookHashTableByID::restoreBooks()
 
                 Book* newBook = doublyLinkedBooks->insertBook(bookID, bookTitle, bookAuthor, summary, genre);
 
-                int index = hash_value(newBook->bookID);
-
-                if (bookTable[index] == nullptr) {
-
-                    bookTable[index] = newBook;
-                }
-                else {
-
-                    for (Book* iterNode = bookTable[index]; iterNode; iterNode = iterNode->hashNext) {
-
-                        if (iterNode->hashNext == nullptr) {
-
-                            iterNode->hashNext = newBook;
-                            break;
-                        }
-                    }
-                }
+                this->addBookInTable(newBook);
+                this->bookHashTableByBookTitle->addBookInTable(newBook);
+                this->bookHashTableByBookAuthor->addBookInTable(newBook);
 
         }
     }
@@ -158,11 +163,12 @@ void BookHashTableByID::searchByID(string bookID)
 
     int index = hash_value(bookID);
 
-    for (Book* iterNode = bookTable[index]; iterNode; iterNode = iterNode->hashNext) {
+    for (Book* iterNode = bookIDTable[index]; iterNode; iterNode = iterNode->hashNextByID) {
 
         if (iterNode->bookID == bookID) {
 
-            cout << iterNode->bookTitle << endl
+            cout << iterNode->bookID << endl
+                << iterNode->bookTitle << endl
                 << iterNode->bookAuthor << endl
                 << iterNode->summary << endl
                 << iterNode->genre << endl;
@@ -173,146 +179,120 @@ void BookHashTableByID::searchByID(string bookID)
     cout << "\n\n\n\t\tBook not Found" << endl;
 }
 
-//void BookHashTableByID::write_file()
-//{
-//
-//
-//    string data = "";
-//
-//    data += std::to_string(Book::totalBooks);
-//    data += ",\n";
-//
-//    for (int i = 0; i < 20; i++) {
-//
-//        Book* iterNode = bookTable[i];
-//
-//        if (iterNode == nullptr) {
-//
-//            data += "nullptr\n";
-//            continue;
-//        }
-//
-//        Book* ll_iterNode = iterNode;
-//
-//        while (ll_iterNode) {
-//
-//            data += ll_iterNode->bookID;
-//            data += ",";
-//            data += ll_iterNode->bookTitle;
-//            data += ",";
-//            data += ll_iterNode->bookAuthor;
-//            data += ",";
-//            data += ll_iterNode->summary;
-//            data += ",";
-//            data += ll_iterNode->genre;
-//            /*data += ",";
-//            data += ll_iterNode->isAvailable;*/
-//
-//            if (ll_iterNode->next == nullptr) {
-//
-//                data += ",nullptr\n";
-//                break;
-//            }
-//            else {
-//
-//                data += ",next\n";
-//            }
-//
-//            ll_iterNode = ll_iterNode->next;
-//        }
-//    }
-//
-//    fstream file;
-//
-//    file.open("books.csv", ios::out);
-//
-//    if (file.is_open()) {
-//
-//        file << data;
-//        file.close();
-//    }
-//}
-//
-//void BookHashTableByID::read_file()
-//{
-//
-//
-//    fstream file;
-//
-//    file.open("books.csv", ios::in);
-//
-//    if (file.is_open()) {
-//
-//        int i = 0;
-//
-//        string data;
-//
-//        string firstLine;
-//
-//        if (getline(file, firstLine)) {
-//
-//            stringstream ss(firstLine);
-//
-//            string totalBooks;
-//            getline(ss, totalBooks, ',');
-//
-//            Book::totalBooks = stoi(totalBooks);
-//        }
-//
-//
-//        while (getline(file, data)) {
-//
-//
-//            if (data == "nullptr") {
-//
-//                i++;
-//                continue;
-//            }
-//            else {
-//
-//                string bookID, bookTitle, bookAuthor, summary, genre, check;
-//                //bool isAvailable;
-//
-//                stringstream ss(data);
-//
-//                getline(ss, bookID, ',');
-//                getline(ss, bookTitle, ',');
-//                getline(ss, bookAuthor, ',');
-//                getline(ss, summary, ',');
-//                getline(ss, genre, ',');
-//
-//                Book* newBook = new Book(bookID, bookTitle, bookAuthor, summary, genre);
-//
-//                getline(ss, check);
-//
-//                if (bookTable[i] == nullptr) {
-//
-//                    bookTable[i] = newBook;
-//                    if (check == "nullptr") i++;
-//                    continue;
-//                }
-//
-//                for (Book* iterNode = bookTable[i]; iterNode; iterNode = iterNode->next) {
-//
-//                    if (iterNode->next == nullptr) {
-//
-//                        iterNode->next = newBook;
-//                        break;
-//                    }
-//                }
-//
-//                if (check == "nullptr") i++;
-//
-//
-//            }
-//        }
-//    }
-//
-//}
-
-
 // BOOK HASH TABLE BY BOOK TITLE
 
-//void BookhashTableByBookTitle::insertBookID()
-//{
-//}
+
+BookHashTableByBookTitle::BookHashTableByBookTitle()
+{
+    for (int i = 0; i < 20; ++i) {
+        bookTitleTable[i] = nullptr;
+    }
+}
+
+BookHashTableByBookTitle::~BookHashTableByBookTitle()
+{
+    //delete[] bookTitleTable;
+    
+}
+
+void BookHashTableByBookTitle::addBookInTable(Book* newBook)
+{
+
+    int index = hash_value(newBook->bookTitle);
+
+    if (bookTitleTable[index] == nullptr) {
+
+        bookTitleTable[index] = newBook;
+        return;
+    }
+
+    for (Book* iterNode = bookTitleTable[index]; iterNode; iterNode = iterNode->hashNextByTitle) {
+
+        if (iterNode->hashNextByTitle == nullptr) {
+
+            iterNode->hashNextByTitle = newBook;
+            return;
+        }
+    }
+}
+
+void BookHashTableByBookTitle::searchByTitle(string bookTitle)
+{
+
+    int index = hash_value(bookTitle);
+
+    for (Book* iterNode = bookTitleTable[index]; iterNode; iterNode = iterNode->hashNextByTitle) {
+
+        if (iterNode->bookTitle == bookTitle) {
+
+            cout<< iterNode->bookID << endl
+                << iterNode->bookTitle << endl
+                << iterNode->bookAuthor << endl
+                << iterNode->summary << endl
+                << iterNode->genre << endl;
+            return;
+        }
+    }
+
+    cout << "\n\n\n\t\tBook not Found" << endl;
+}
+
+
+
+// BY AUTHOR
+
+
+BookHashTableByBookAuthor::BookHashTableByBookAuthor()
+{
+
+    for (int i = 0; i < 20; ++i) {
+        bookAuthorTable[i] = nullptr;
+    }
+}
+
+BookHashTableByBookAuthor::~BookHashTableByBookAuthor()
+{
+}
+
+void BookHashTableByBookAuthor::addBookInTable(Book* newBook)
+{
+
+
+    int index = hash_value(newBook->bookAuthor);
+    
+    if (this->bookAuthorTable[index] == nullptr) {
+
+        this->bookAuthorTable[index] = newBook;
+        return;
+    }
+
+    for (Book* iterNode = this->bookAuthorTable[index]; iterNode; iterNode = iterNode->hashNextByAuthor) {
+
+        if (iterNode->hashNextByAuthor == nullptr) {
+
+            iterNode->hashNextByAuthor = newBook;
+            return;
+        }
+    }
+}
+
+void BookHashTableByBookAuthor::searchByAuthor(string bookAuthor)
+{
+
+    int index = hash_value(bookAuthor);
+
+    for (Book* iterNode = this->bookAuthorTable[index]; iterNode; iterNode = iterNode->hashNextByAuthor) {
+
+        if (iterNode->bookAuthor == bookAuthor) {
+
+            cout << iterNode->bookID << endl
+                << iterNode->bookTitle << endl
+                << iterNode->bookAuthor << endl
+                << iterNode->summary << endl
+                << iterNode->genre << endl;
+            return;
+        }
+    }
+
+    cout << "\n\n\n\t\tBook not Found" << endl;
+}
