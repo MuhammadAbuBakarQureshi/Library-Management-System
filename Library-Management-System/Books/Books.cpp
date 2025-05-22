@@ -26,7 +26,7 @@ BookHashTableByID::~BookHashTableByID()
 
 void BookHashTableByID::insertBook(string bookTitle, string bookAuthor, string summary, string genre)
 {
-    Book* newBook = doublyLinkedBooks->insertBook("needed", bookTitle, bookAuthor, summary, genre);
+    Book* newBook = doublyLinkedBooks->insertBook("needed", bookTitle, bookAuthor, summary, genre, "1");
 
     this->addBookInTable(newBook);
     this->bookHashTableByBookTitle->addBookInTable(newBook);
@@ -88,7 +88,18 @@ void BookHashTableByID::listAllBooks()
     }
 }
 
-void BookHashTableByID::searchByID(string bookID)
+void BookHashTableByID::listBook(Book* book)
+{
+
+    cout << book->bookID << "   "
+        << book->bookTitle << "   "
+        << book->bookAuthor << "   "
+        << book->summary << "   "
+        << book->genre << "    "
+        << ((book->isAvailable) ? "True" : "False") << "\n" << endl;
+}
+
+Book* BookHashTableByID::searchByID(string bookID)
 {
 
     int index = hash_value(bookID);
@@ -97,16 +108,62 @@ void BookHashTableByID::searchByID(string bookID)
 
         if (iterNode->bookID == bookID) {
 
-            cout << iterNode->bookID << endl
-                << iterNode->bookTitle << endl
-                << iterNode->bookAuthor << endl
-                << iterNode->summary << endl
-                << iterNode->genre << endl;
-            return;
+            this->listBook(iterNode);
+            return iterNode;
         }
     }
 
     cout << "\n\n\n\t\tBook not Found" << endl;
+}
+
+void BookHashTableByID::borrowBook(string bookID)
+{
+    Book* book = this->searchByID(bookID);
+    
+    cout << "Do you want to borrow this book (y / n): ";
+    string option;
+    cin >> option;
+
+    bool isRunning = true;
+
+    while (isRunning) {
+
+        if (option == "y") {
+
+            if (!book->isAvailable) {
+
+                cout << "\n\n\t This book is not available\n" << endl;
+            }
+            else {
+
+                book->isAvailable = false;
+            }
+            isRunning = false;
+        }
+        else if (option == "n") {
+
+            isRunning = false;
+        }
+        else {
+
+            cout << "\n\n\t\tEnter correct option" << endl;
+        }
+
+    }
+}
+
+void BookHashTableByID::returnBook(string bookID)
+{
+    Book* book = this->searchByID(bookID);
+
+    if (book->isAvailable) {
+
+        cout << "\n\n\tThis book is available\n" << endl;
+    }
+    else {
+
+        book->isAvailable = true;
+    }
 }
 
 
@@ -187,7 +244,7 @@ void BookHashTableByID::restoreBooks()
 
             cout << ((isAvailable == "true") ? "1" : "0") << endl;
 
-            Book* newBook = doublyLinkedBooks->insertBook(bookID, bookTitle, bookAuthor, summary, genre);
+            Book* newBook = doublyLinkedBooks->insertBook(bookID, bookTitle, bookAuthor, summary, genre, ((isAvailable == "true") ? 1 : 0));
 
             this->addBookInTable(newBook);
             this->bookHashTableByBookTitle->addBookInTable(newBook);
@@ -249,11 +306,12 @@ void BookHashTableByBookTitle::searchByTitle(string bookTitle)
 
         if (iterNode->bookTitle == bookTitle) {
 
-            cout<< iterNode->bookID << endl
-                << iterNode->bookTitle << endl
-                << iterNode->bookAuthor << endl
-                << iterNode->summary << endl
-                << iterNode->genre << endl;
+            cout << iterNode->bookID << "   "
+                << iterNode->bookTitle << "   "
+                << iterNode->bookAuthor << "   "
+                << iterNode->summary << "   "
+                << iterNode->genre << "    "
+                << ((iterNode->isAvailable) ? "True" : "False") << "\n" << endl;
             return;
         }
     }
@@ -302,6 +360,7 @@ void BookHashTableByBookAuthor::addBookInTable(Book* newBook)
 
 void BookHashTableByBookAuthor::searchByAuthor(string bookAuthor)
 {
+    bool isFound = false;
 
     int index = hash_value(bookAuthor);
 
@@ -309,14 +368,19 @@ void BookHashTableByBookAuthor::searchByAuthor(string bookAuthor)
 
         if (iterNode->bookAuthor == bookAuthor) {
 
-            cout << iterNode->bookID << endl
-                << iterNode->bookTitle << endl
-                << iterNode->bookAuthor << endl
-                << iterNode->summary << endl
-                << iterNode->genre << endl;
-            return;
+            cout << iterNode->bookID << "   "
+                << iterNode->bookTitle << "   "
+                << iterNode->bookAuthor << "   "
+                << iterNode->summary << "   "
+                << iterNode->genre << "    "
+                << ((iterNode->isAvailable) ? "True" : "False") << "\n" << endl;
+
+            isFound = true;
         }
     }
 
-    cout << "\n\n\n\t\tBook not Found" << endl;
+    if (!isFound) {
+
+        cout << "\n\n\t\tBook Not Found" << endl;
+    }
 }
