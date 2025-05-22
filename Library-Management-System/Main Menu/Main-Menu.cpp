@@ -12,28 +12,28 @@ using namespace std;
 
 void mainMenu() {
 
-	/*BookHashTableByID* bookHashTableByID = new BookHashTableByID();
+	//BookHashTableByID* bookHashTableByID = new BookHashTableByID();
 
-	bookHashTableByID->restoreBooks();
+	//bookHashTableByID->restoreBooks();
 
-	string bookID, bookTitle, bookAuthor, summary, genre;
+	//string bookID, bookTitle, bookAuthor, summary, genre;
 
-	bookTitle = "Atomic habits";
-	bookAuthor = "Bakar";
-	summary = "This books helps you to replace your bad habits with good ones";
-	genre = "Self-Improvement";
+	//bookTitle = "Atomic habits";
+	//bookAuthor = "Bakar";
+	//summary = "This books helps you to replace your bad habits with good ones";
+	//genre = "Self-Improvement";
 
-	
-	bookHashTableByID->addBook(bookTitle, bookAuthor, summary, genre);
+	//
+	//bookHashTableByID->insertBook(bookTitle, bookAuthor, summary, genre);
 
-	bookTitle = "Money power";
-	bookAuthor = "Abdullah";
-	summary = "It explains power of money";
-	genre = "Power";
+	//bookTitle = "Money power";
+	//bookAuthor = "Abdullah";
+	//summary = "It explains power of money";
+	//genre = "Power";
 
-	bookHashTableByID->addBook(bookTitle, bookAuthor, summary, genre);
+	//bookHashTableByID->insertBook(bookTitle, bookAuthor, summary, genre);
 
-	bookHashTableByID->storeBooks();*/
+	//bookHashTableByID->storeBooks();
 
 
 	UserMainMenu userMainMenu;
