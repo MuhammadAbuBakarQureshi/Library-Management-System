@@ -9,6 +9,18 @@
 
 using namespace std;
 
+string toLower(string str) {
+
+    string lower = "";
+
+    for (char ch : str) {
+
+        lower += tolower(ch);
+    }
+
+    return lower;
+}
+
 
 
 BookHashTableByID::BookHashTableByID()
@@ -217,37 +229,52 @@ Book* BookHashTableByID::searchByID(string bookID)
 
 void BookHashTableByID::borrowBook(string bookID)
 {
+
     Book* book = this->searchByID(bookID);
-    
-    cout << "Do you want to borrow this book (y / n): ";
-    string option;
-    cin >> option;
 
-    bool isRunning = true;
+    if (!book) {
+        std::cout << "\nBook not found.\n";
+        return;
+    }
 
-    while (isRunning) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-        if (option == "y") {
+    // Show book info briefly
+    SetConsoleTextAttribute(hConsole, 11); // Cyan
+    std::cout << "\n\n" << std::setw(50) << "Borrow Book\n\n";
+    SetConsoleTextAttribute(hConsole, 15); // Reset
 
+    std::string option;
+    bool validInput = false;
+
+    while (!validInput) {
+        std::cout << "\nDo you want to borrow this book? (y / n): ";
+        std::cin >> option;
+        option = toLower(option);
+
+        if (option == "y" || option == "yes") {
             if (!book->isAvailable) {
-
-                cout << "\n\n\t This book is not available\n" << endl;
+                SetConsoleTextAttribute(hConsole, 12); // Red
+                std::cout << "\nSorry, this book is currently not available.\n";
+                SetConsoleTextAttribute(hConsole, 15); // Reset
             }
             else {
-
                 book->isAvailable = false;
+                SetConsoleTextAttribute(hConsole, 10); // Green
+                std::cout << "\nYou have successfully borrowed the book.\n";
+                SetConsoleTextAttribute(hConsole, 15); // Reset
             }
-            isRunning = false;
+            validInput = true;
         }
-        else if (option == "n") {
-
-            isRunning = false;
+        else if (option == "n" || option == "no") {
+            std::cout << "\nNo problem. Maybe next time!\n";
+            validInput = true;
         }
         else {
-
-            cout << "\n\n\t\tEnter correct option" << endl;
+            SetConsoleTextAttribute(hConsole, 12); // Red
+            std::cout << "\nInvalid option. Please enter 'y' or 'n'.\n";
+            SetConsoleTextAttribute(hConsole, 15); // Reset
         }
-
     }
 }
 
@@ -255,14 +282,26 @@ void BookHashTableByID::returnBook(string bookID)
 {
     Book* book = this->searchByID(bookID);
 
-    if (book->isAvailable) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-        cout << "\n\n\tThis book is available\n" << endl;
+    if (!book) {
+        SetConsoleTextAttribute(hConsole, 12); // Red
+        std::cout << "\n[!] Book not found.\n";
+        SetConsoleTextAttribute(hConsole, 15); // Reset
+        return;
+    }
+
+    if (book->isAvailable) {
+        SetConsoleTextAttribute(hConsole, 14); // Yellow
+        std::cout << "\n\n[!] This book is already marked as available.\n\n";
     }
     else {
-
         book->isAvailable = true;
+        SetConsoleTextAttribute(hConsole, 10); // Green
+        std::cout << "\n\n[?] Book returned successfully.\n\n";
     }
+
+    SetConsoleTextAttribute(hConsole, 15); // Reset color
 }
 
 
