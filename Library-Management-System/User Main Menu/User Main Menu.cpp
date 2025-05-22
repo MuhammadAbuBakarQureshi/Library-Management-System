@@ -100,7 +100,9 @@ void UserMainMenu::run() {
 		std::cout << "1. List All Books \n\n" << std::endl 
 			<< "\n\n2. Insert book." << std::endl
 			<< "3. Find Book \n\n" << std::endl
-			<< "4. Exit\n\n" << std::endl;
+			<< "4. Borrow Book \n\n" << std::endl
+			<< "5. Return Book \n\n" << std::endl
+			<< "6. Exit\n\n" << std::endl;
 
 
 		string options;
@@ -118,6 +120,22 @@ void UserMainMenu::run() {
 			this->findBook();
 		}
 		else if (options == "4") {
+
+			string bookID;
+			cout << "Enter book ID: ";
+			cin >> bookID;
+
+			this->bookHashTableByID->borrowBook(bookID);
+		}
+		else if (options == "5") {
+
+			string bookID;
+			cout << "Enter book ID: ";
+			cin >> bookID;
+			
+			this->bookHashTableByID->returnBook(bookID);
+		}
+		else if (options == "6") {
 
 			isRunning = false;
 		}
