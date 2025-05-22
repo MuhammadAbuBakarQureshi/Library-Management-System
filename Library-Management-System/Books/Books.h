@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <string>
 
 #include "../Login-Registration/Keys/key.h"
 
