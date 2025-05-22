@@ -58,7 +58,13 @@ public:
 
     void listAllBooks();
 
-    void searchByID(string bookID);
+    void listBook(Book*);
+
+    Book* searchByID(string bookID);
+
+    void borrowBook(string);
+
+    void returnBook(string);
 
     void storeBooks();
 
