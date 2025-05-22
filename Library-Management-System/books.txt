@@ -1,6 +1,6 @@
 50,
 1,Atomic Habits,James Clear,This book helps you build better habits and break bad ones.,Self-Improvement,true,
-2,The Power of Now,Eckhart Tolle,A guide to spiritual enlightenment and living in the present.,Spirituality,true,
+2,The Power of Now,Eckhart Tolle,A guide to spiritual enlightenment and living in the present.,Spirituality,false,
 3,Digital Fortress,Dan Brown,A thrilling story about cryptography and data privacy.,Thriller,true,
 4,Deep Work,Cal Newport,How to focus in a distracted world.,Productivity,true,
 5,The Alchemist,Paulo Coelho,A magical story about following your dreams.,Fiction,true,
