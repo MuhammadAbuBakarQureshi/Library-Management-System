@@ -26,7 +26,7 @@ public:
 
     // Constructor
 
-    Book(string bookID, string bookTitle, string bookAuthor, string summary, string genre);
+    Book(string bookID, string bookTitle, string bookAuthor, string summary, string genre, bool);
 };
 
 
@@ -41,6 +41,6 @@ public:
     DoublyLinkedBooks();
     ~DoublyLinkedBooks();
 
-    Book* insertBook(string, string, string, string, string);
+    Book* insertBook(string, string, string, string, string, bool);
 
 };
