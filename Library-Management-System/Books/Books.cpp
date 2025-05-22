@@ -56,90 +56,6 @@ void BookHashTableByID::addBookInTable(Book* newBook)
     }
 }
 
-void BookHashTableByID::storeBooks()
-{
-    string data = "";    
-
-    data += to_string(doublyLinkedBooks->totalBooks);
-    data += ",\n";
-
-    for (Book* iterNode = doublyLinkedBooks->tail; iterNode; iterNode = iterNode->prev) {
-
-        data += iterNode->bookID;
-        data += ",";
-        data += iterNode->bookTitle;
-        data += ",";
-        data += iterNode->bookAuthor;
-        data += ",";
-        data += iterNode->summary;
-        data += ",";
-        data += iterNode->genre;
-        data += ",";
-        data += (iterNode->isAvailable ? "true" : "false");
-        data += ",\n";
-    }
-
-    fstream file;
-    
-    file.open("books.txt", ios::out);
-    
-    if (file.is_open()) {
-    
-        file << data;
-        file.close();
-    }
-}
-
-void BookHashTableByID::restoreBooks()
-{
-
-    fstream file;
-    
-    file.open("books.txt", ios::in);
-    
-    if (file.is_open()) {
-    
-        string data;
-    
-        string firstLine;
-    
-        if (getline(file, firstLine)) {
-    
-            stringstream ss(firstLine);
-    
-            string totalBooks;
-            getline(ss, totalBooks, ',');
-    
-            doublyLinkedBooks->totalBooks = stoi(totalBooks);
-        }
-    
-    
-        while (getline(file, data)) {
-    
-   
-                string bookID, bookTitle, bookAuthor, summary, genre, isAvailable, check;
-    
-                stringstream ss(data);
-    
-                getline(ss, bookID, ',');
-                getline(ss, bookTitle, ',');
-                getline(ss, bookAuthor, ',');
-                getline(ss, summary, ',');
-                getline(ss, genre, ',');
-                getline(ss, isAvailable, ',');
-    
-                cout << ((isAvailable == "true") ? "1" : "0") << endl;
-
-                Book* newBook = doublyLinkedBooks->insertBook(bookID, bookTitle, bookAuthor, summary, genre);
-
-                this->addBookInTable(newBook);
-                this->bookHashTableByBookTitle->addBookInTable(newBook);
-                this->bookHashTableByBookAuthor->addBookInTable(newBook);
-
-        }
-    }
-}
-
 //bool BookHashTableByID::checkID(string bookID)
 //{
 //
@@ -157,6 +73,20 @@ void BookHashTableByID::restoreBooks()
 //
 //    return true;
 //}
+
+void BookHashTableByID::listAllBooks()
+{
+
+    for (Book* iterNode = doublyLinkedBooks->tail; iterNode; iterNode = iterNode->prev) {
+
+        cout << iterNode->bookID << "   " 
+            << iterNode->bookTitle << "   " 
+            << iterNode->bookAuthor << "   "
+            << iterNode->summary << "   "
+            << iterNode->genre << "    "
+            << ((iterNode->isAvailable) ? "True" : "False") << "\n" << endl;
+    }
+}
 
 void BookHashTableByID::searchByID(string bookID)
 {
@@ -178,6 +108,100 @@ void BookHashTableByID::searchByID(string bookID)
 
     cout << "\n\n\n\t\tBook not Found" << endl;
 }
+
+
+
+
+
+void BookHashTableByID::storeBooks()
+{
+    string data = "";
+
+    data += to_string(doublyLinkedBooks->totalBooks);
+    data += ",\n";
+
+    for (Book* iterNode = doublyLinkedBooks->tail; iterNode; iterNode = iterNode->prev) {
+
+        data += iterNode->bookID;
+        data += ",";
+        data += iterNode->bookTitle;
+        data += ",";
+        data += iterNode->bookAuthor;
+        data += ",";
+        data += iterNode->summary;
+        data += ",";
+        data += iterNode->genre;
+        data += ",";
+        data += (iterNode->isAvailable ? "true" : "false");
+        data += ",\n";
+    }
+
+    fstream file;
+
+    file.open("books.txt", ios::out);
+
+    if (file.is_open()) {
+
+        file << data;
+        file.close();
+    }
+}
+
+void BookHashTableByID::restoreBooks()
+{
+
+    fstream file;
+
+    file.open("books.txt", ios::in);
+
+    if (file.is_open()) {
+
+        string data;
+
+        string firstLine;
+
+        if (getline(file, firstLine)) {
+
+            stringstream ss(firstLine);
+
+            string totalBooks;
+            getline(ss, totalBooks, ',');
+
+            doublyLinkedBooks->totalBooks = stoi(totalBooks);
+        }
+
+
+        while (getline(file, data)) {
+
+
+            string bookID, bookTitle, bookAuthor, summary, genre, isAvailable, check;
+
+            stringstream ss(data);
+
+            getline(ss, bookID, ',');
+            getline(ss, bookTitle, ',');
+            getline(ss, bookAuthor, ',');
+            getline(ss, summary, ',');
+            getline(ss, genre, ',');
+            getline(ss, isAvailable, ',');
+
+            cout << ((isAvailable == "true") ? "1" : "0") << endl;
+
+            Book* newBook = doublyLinkedBooks->insertBook(bookID, bookTitle, bookAuthor, summary, genre);
+
+            this->addBookInTable(newBook);
+            this->bookHashTableByBookTitle->addBookInTable(newBook);
+            this->bookHashTableByBookAuthor->addBookInTable(newBook);
+
+        }
+    }
+}
+
+
+
+
+
+
 
 // BOOK HASH TABLE BY BOOK TITLE
 
