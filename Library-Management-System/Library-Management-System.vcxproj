@@ -157,6 +157,10 @@
     <ClInclude Include="Signup Login\Buttons\Button.h" />
     <ClInclude Include="User Main Menu\User-Main-Menu.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="books.txt" />
+    <Text Include="Dummy-Boooks.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
