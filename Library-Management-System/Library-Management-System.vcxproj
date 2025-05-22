@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Admin Main Menu\Admin-Main-Menu.cpp" />
     <ClCompile Include="Books\Books.cpp" />
     <ClCompile Include="Books\Doubly Books\Doubly-Books.cpp" />
     <ClCompile Include="Library-Management-System.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="User Main Menu\User Main Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admin Main Menu\Admin-Main-Menu.h" />
     <ClInclude Include="Books\Books.h" />
     <ClInclude Include="Books\Doubly Books\Doubly-Books.h" />
     <ClInclude Include="Login-Registration\Keys\key.h" />
