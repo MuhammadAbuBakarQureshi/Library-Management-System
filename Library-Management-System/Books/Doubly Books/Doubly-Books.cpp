@@ -1,6 +1,6 @@
 #include "Doubly-Books.h"
 
-Book::Book(string bookID, string bookTitle, string bookAuthor, string summary, string genre)
+Book::Book(string bookID, string bookTitle, string bookAuthor, string summary, string genre, bool isAvailable)
 {
 
     this->bookID = bookID;
@@ -8,7 +8,7 @@ Book::Book(string bookID, string bookTitle, string bookAuthor, string summary, s
     this->bookAuthor = bookAuthor;
     this->summary = summary;
     this->genre = genre;
-    this->isAvailable = true; // True by default
+    this->isAvailable = isAvailable; // True by default
     this->prev = nullptr;
     this->next = nullptr;
     this->hashNextByID = nullptr;
@@ -29,7 +29,7 @@ DoublyLinkedBooks::~DoublyLinkedBooks()
     delete tail;
 }
 
-Book* DoublyLinkedBooks::insertBook(string bookID, string bookTitle, string bookAuthor, string summary, string genre) {
+Book* DoublyLinkedBooks::insertBook(string bookID, string bookTitle, string bookAuthor, string summary, string genre, bool isAvailable) {
 
     if (bookID == "needed") {
 
@@ -39,7 +39,7 @@ Book* DoublyLinkedBooks::insertBook(string bookID, string bookTitle, string book
     }
 
 
-    Book* newBook = new Book(bookID, bookTitle, bookAuthor, summary, genre);
+    Book* newBook = new Book(bookID, bookTitle, bookAuthor, summary, genre, isAvailable);
 
     if (this->head == nullptr) {
 
