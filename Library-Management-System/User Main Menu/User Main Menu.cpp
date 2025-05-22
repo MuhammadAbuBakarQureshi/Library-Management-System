@@ -1,4 +1,8 @@
+#include <windows.h>
+#include <iomanip>
+
 #include "User-Main-Menu.h"
+
 
 UserMainMenu::UserMainMenu() {
 
@@ -15,151 +19,191 @@ UserMainMenu::~UserMainMenu() {
 void UserMainMenu::insertBook() {
 
 
-	std::string bookTitle, bookAuthor, summary, genre;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	string bookTitle, bookAuthor, summary, genre;
 
-	cout << "Enter book title : ";
+	system("cls");
+
+	SetConsoleTextAttribute(hConsole, 11); // Cyan
+	cout << string(40, ' ') << "New Book Entry\n\n";
+	SetConsoleTextAttribute(hConsole, 15); // Reset
+
+	cout << "----------------------------------------\n";
+	SetConsoleTextAttribute(hConsole, 14); // Yellow
+	cout << "Book Title:\n";
+	SetConsoleTextAttribute(hConsole, 15); // Reset
+	cout << ">> ";
 	getline(cin >> ws, bookTitle);
 
-
-	cout << "\n\nEnter author name: ";
+	cout << "\n----------------------------------------\n";
+	SetConsoleTextAttribute(hConsole, 14);
+	cout << "Author Name:\n";
+	SetConsoleTextAttribute(hConsole, 15);
+	cout << ">> ";
 	getline(cin >> ws, bookAuthor);
 
-	cout << "\n\nEnter summary: ";
+	cout << "\n----------------------------------------\n";
+	SetConsoleTextAttribute(hConsole, 14);
+	cout << "Book Summary:\n";
+	SetConsoleTextAttribute(hConsole, 15);
+	cout << ">> ";
 	getline(cin >> ws, summary);
 
-	cout << "\n\nEnter genre: ";
+	cout << "\n----------------------------------------\n";
+	SetConsoleTextAttribute(hConsole, 14);
+	cout << "Genre:\n";
+	SetConsoleTextAttribute(hConsole, 15);
+	cout << ">> ";
 	getline(cin >> ws, genre);
 
+	cout << "\n----------------------------------------\n";
+
+	// Insert into hash table
 	bookHashTableByID->insertBook(bookTitle, bookAuthor, summary, genre);
+
+	SetConsoleTextAttribute(hConsole, 10); // Green
+	cout << "\nBook successfully inserted!\n";
+	SetConsoleTextAttribute(hConsole, 15); // Reset
+
+	cout << "\nPress Enter to return to menu...";
+	cin.get();
 }
 
 void UserMainMenu::findBook() {
 
-	std::cout << "\n\n\t\tSearch By\n\n" << std::endl;
-
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	bool isRunning = true;
 
 	while (isRunning) {
+		system("cls");
 
-		std::cout << "\n\n1. Search by ID." << std::endl
-			<< "2. Search by Title. \n\n" << std::endl
-			<< "3. Search by Author. \n\n" << std::endl
-			<< "4. Exit\n\n" << std::endl;
+		SetConsoleTextAttribute(hConsole, 11); // Bright cyan
+		cout << string(50, ' ') << "Search Books Menu\n\n";
 
+		SetConsoleTextAttribute(hConsole, 15); // Reset color
+		cout << " 1. Search by ID\n";
+		cout << " 2. Search by Title\n";
+		cout << "-------------------------------------------------------------\n";
+		cout << " 3. Search by Author\n";
+		cout << " 4. Exit\n";
+		cout << "-------------------------------------------------------------\n";
 
-		string options;
+		cout << "\nEnter your option: ";
+		string option;
+		cin >> option;
 
-		std::cin >> options;
+		cin.ignore(); // flush newline
+		system("cls");
 
-		if (options == "1") {
-
+		if (option == "1") {
 			string bookID;
-
-			cout << "\n\nEnter BookID: ";
+			cout << "Enter Book ID: ";
 			getline(cin >> ws, bookID);
-
 			bookHashTableByID->searchByID(bookID);
+
 		}
-		else if (options == "2") {
-
+		else if (option == "2") {
 			string bookTitle;
-
 			cout << "Enter Book Title: ";
 			getline(cin >> ws, bookTitle);
-
 			bookHashTableByID->bookHashTableByBookTitle->searchByTitle(bookTitle);
-		}else if (options == "3") {
-		
-			string bookAuthor;
 
+		}
+		else if (option == "3") {
+			string bookAuthor;
 			cout << "Enter Book Author: ";
 			getline(cin >> ws, bookAuthor);
-
 			bookHashTableByID->bookHashTableByBookAuthor->searchByAuthor(bookAuthor);
-		}
-		else if (options == "4") {
 
+		}
+		else if (option == "4") {
+			SetConsoleTextAttribute(hConsole, 10); // Green
+			cout << "\nExiting Search Menu...\n";
+			SetConsoleTextAttribute(hConsole, 15); // Reset
 			isRunning = false;
+
 		}
 		else {
+			SetConsoleTextAttribute(hConsole, 12); // Red
+			cout << "\nInvalid option. Please try again.\n";
+			SetConsoleTextAttribute(hConsole, 15); // Reset
+		}
 
-			cout << "Enter correct option" << endl;
+		if (isRunning) {
+			cout << "\nPress Enter to continue...";
+			cin.get();
 		}
 	}
 }
 
-
 void UserMainMenu::run() {
 
-	std::cout << "\n\n\t\tUser Main Menu\n\n" << std::endl;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	bool isRunning = true;
 
 	while (isRunning) {
+		system("cls"); // Clear screen for fresh menu
 
-		std::cout << "1. List All Books \n\n" << std::endl 
-			<< "\n\n2. Insert book." << std::endl
-			<< "3. Find Book \n\n" << std::endl
-			<< "4. Borrow Book \n\n" << std::endl
-			<< "5. Return Book \n\n" << std::endl
-			<< "6. Exit\n\n" << std::endl;
+		// Set color to bright cyan
+		SetConsoleTextAttribute(hConsole, 11);
+		cout << "\n\n" << setw(50) << "User Main Menu" << "\n\n";
 
+		// Reset color
+		SetConsoleTextAttribute(hConsole, 15);
+		cout << "-------------------------------------------------------------\n";
 
-		string options;
+		cout << " 1. List All Books\n";
+		cout << " 2. Insert Book\n";
+		cout << " 3. Find Book\n";
+		cout << " 4. Borrow Book\n";
+		cout << " 5. Return Book\n";
+		cout << " 6. Exit\n";
 
-		std::cin >> options;
+		cout << "-------------------------------------------------------------\n";
 
-		if (options == "1") {
+		cout << "\nEnter your option: ";
 
-			this->bookHashTableByID->listAllBooks();
-		}else if (options == "2") {
+		string option;
+		cin >> option;
 
-			this->insertBook();
-		}else if(options == "3") {
-		
-			this->findBook();
+		system("cls"); // Clear screen before executing option
+
+		if (option == "1") {
+			bookHashTableByID->listAllBooks();
 		}
-		else if (options == "4") {
-
+		else if (option == "2") {
+			insertBook();
+		}
+		else if (option == "3") {
+			findBook();
+		}
+		else if (option == "4") {
 			string bookID;
-			cout << "Enter book ID: ";
+			cout << "Enter Book ID to borrow: ";
 			cin >> bookID;
-
-			this->bookHashTableByID->borrowBook(bookID);
+			bookHashTableByID->borrowBook(bookID);
 		}
-		else if (options == "5") {
-
+		else if (option == "5") {
 			string bookID;
-			cout << "Enter book ID: ";
+			cout << "Enter Book ID to return: ";
 			cin >> bookID;
-			
-			this->bookHashTableByID->returnBook(bookID);
+			bookHashTableByID->returnBook(bookID);
 		}
-		else if (options == "6") {
-
+		else if (option == "6") {
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "\nExiting... Have a great day!\n";
+			SetConsoleTextAttribute(hConsole, 15);
 			isRunning = false;
 		}
 		else {
-
-			cout << "Enter correct option" << endl;
+			SetConsoleTextAttribute(hConsole, 12);
+			cout << "\nInvalid option. Please try again.\n";
+			SetConsoleTextAttribute(hConsole, 15);
 		}
 
-		/*switch (options)
-		{
-		case 1:
-
-			this->addBook();
-			break;
-
-		case 2:
-
-			isClose = true;
-			break;
-
-		default:
-
-			cout << "enter correct one";
-			break;
-		}*/
+		cout << "\n\nPress Enter to continue...";
+		cin.ignore();
+		cin.get();
 	}
 }
