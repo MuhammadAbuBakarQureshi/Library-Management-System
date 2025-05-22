@@ -53,14 +53,16 @@ public:
     void insertBook(string, string, string, string);
 
     void addBookInTable(Book*);
-    
+   
+    //bool checkID(string bookID);
+
+    void listAllBooks();
+
+    void searchByID(string bookID);
+
     void storeBooks();
 
     void restoreBooks();
-
-    //bool checkID(string bookID);
-
-    void searchByID(string bookID);
 
     //void write_file();
 
