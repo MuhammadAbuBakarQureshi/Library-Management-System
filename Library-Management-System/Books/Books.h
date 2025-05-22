@@ -9,16 +9,50 @@
 
 using namespace std;
 
+class BookHashTableByBookAuthor {
+
+public:
+
+    Book* bookAuthorTable[20];
+
+    BookHashTableByBookAuthor();
+    ~BookHashTableByBookAuthor();
+
+    void addBookInTable(Book* newBook);
+
+    void searchByAuthor(string bookAuthor);
+};
+
+class BookHashTableByBookTitle {
+
+public:
+
+    Book* bookTitleTable[20];
+
+    BookHashTableByBookTitle();
+    ~BookHashTableByBookTitle();
+
+    void addBookInTable(Book* newBook);
+
+    void searchByTitle(string bookTitle);
+};
+
+
 class BookHashTableByID {
 
 public:
 
-    Book* bookTable[20];
+    Book* bookIDTable[20];
     DoublyLinkedBooks* doublyLinkedBooks;
+    BookHashTableByBookTitle* bookHashTableByBookTitle;
+    BookHashTableByBookAuthor* bookHashTableByBookAuthor;
 
     BookHashTableByID();
+    ~BookHashTableByID();
 
-    void addBook(string, string, string, string);
+    void insertBook(string, string, string, string);
+
+    void addBookInTable(Book*);
     
     void storeBooks();
 
@@ -32,12 +66,3 @@ public:
 
     //void read_file();
 };
-
-//class BookhashTableByBookTitle {
-//
-//public:
-//
-//    Book* bookTable[20];
-//
-//    void insertBookID();
-//};
