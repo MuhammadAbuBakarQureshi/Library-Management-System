@@ -81,9 +81,9 @@ void UserMainMenu::findBook() {
 		cout << string(50, ' ') << "Search Books Menu\n\n";
 
 		SetConsoleTextAttribute(hConsole, 15); // Reset color
+		cout << "-------------------------------------------------------------\n";
 		cout << " 1. Search by ID\n";
 		cout << " 2. Search by Title\n";
-		cout << "-------------------------------------------------------------\n";
 		cout << " 3. Search by Author\n";
 		cout << " 4. Exit\n";
 		cout << "-------------------------------------------------------------\n";
