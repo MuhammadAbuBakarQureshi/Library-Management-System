@@ -19,6 +19,7 @@ Book::Book(string bookID, string bookTitle, string bookAuthor, string summary, s
 DoublyLinkedBooks::DoublyLinkedBooks() {
 
     this->totalBooks = 0;
+    this->totalBooksInserted = 0;
     this->head = nullptr;
     this->tail = nullptr;
 }
@@ -34,9 +35,10 @@ Book* DoublyLinkedBooks::insertBook(string bookID, string bookTitle, string book
 
     if (bookID == "needed") {
 
+        totalBooksInserted++;
         totalBooks++;
 
-        bookID = to_string(totalBooks);
+        bookID = to_string(totalBooksInserted);
     }
 
 
