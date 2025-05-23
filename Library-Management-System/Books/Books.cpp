@@ -170,6 +170,8 @@ void BookHashTableByID::listAllBooks()
             << "+" << string(genreWidth + 2, '-')
             << "+" << string(availWidth + 2, '-')
             << "+" << RESET_COLOR << endl;
+
+        cout << "\n\n\tTotal Books : " << this->doublyLinkedBooks->totalBooks << endl;
 }
 
 void BookHashTableByID::listBook(Book* book)
@@ -213,6 +215,8 @@ void BookHashTableByID::listBook(Book* book)
 Book* BookHashTableByID::searchByID(string bookID)
 {
 
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
     int index = hash_value(bookID);
 
     for (Book* iterNode = bookIDTable[index]; iterNode; iterNode = iterNode->hashNextByID) {
@@ -224,7 +228,11 @@ Book* BookHashTableByID::searchByID(string bookID)
         }
     }
 
-    cout << "\n\n\n\t\tBook not Found" << endl;
+    SetConsoleTextAttribute(hConsole, 12); // Red
+    std::cout << "\n? Book not found.\n";
+    SetConsoleTextAttribute(hConsole, 15); // Reset
+
+    return nullptr;
 }
 
 void BookHashTableByID::borrowBook(string bookID)
@@ -304,9 +312,42 @@ void BookHashTableByID::returnBook(string bookID)
     SetConsoleTextAttribute(hConsole, 15); // Reset color
 }
 
+void BookHashTableByID::updateBook(string bookID, string bookTitle, string bookAuthor, string summary, string genre)
+{
+    
+    Book* book = this->searchByID(bookID);
 
+    book->bookTitle = bookTitle;
+    book->bookAuthor = bookAuthor;
+    book->summary = summary;
+    book->genre = genre;
+}
 
+bool BookHashTableByID::deleteBook(string bookID)
+{
+    Book* book = this->searchByID(bookID);
 
+    if (!book) {
+
+        return false;
+    }
+    else {
+
+        this->doublyLinkedBooks->deleteBook(book);
+        this->doublyLinkedBooks->totalBooks--;
+        this->storeBooks();
+        this->restoreBooks();
+        return true;
+    }
+
+}
+
+void BookHashTableByID::emptyHashTable()
+{
+    for (int i = 0; i < HASH_TABLE_SIZE; ++i) {
+        this->bookIDTable[i] = nullptr;
+    }
+}
 
 void BookHashTableByID::storeBooks()
 {
@@ -345,6 +386,10 @@ void BookHashTableByID::storeBooks()
 void BookHashTableByID::restoreBooks()
 {
 
+    this->emptyHashTable();
+    this->bookHashTableByBookTitle->emptyHashTable();
+    this->bookHashTableByBookAuthor->emptyHashTable();
+
     fstream file;
 
     file.open("books.txt", ios::in);
@@ -379,8 +424,6 @@ void BookHashTableByID::restoreBooks()
             getline(ss, summary, ',');
             getline(ss, genre, ',');
             getline(ss, isAvailable, ',');
-
-            cout << ((isAvailable == "true") ? "1" : "0") << endl;
 
             Book* newBook = doublyLinkedBooks->insertBook(bookID, bookTitle, bookAuthor, summary, genre, ((isAvailable == "true") ? 1 : 0));
 
@@ -460,6 +503,14 @@ void BookHashTableByBookTitle::searchByTitle(string bookTitle)
 
 }
 
+void BookHashTableByBookTitle::emptyHashTable()
+{
+
+    for (int i = 0; i < HASH_TABLE_SIZE; ++i) {
+        this->bookTitleTable[i] = nullptr;
+    }
+}
+
 
 
 // BY AUTHOR
@@ -520,5 +571,13 @@ void BookHashTableByBookAuthor::searchByAuthor(string bookAuthor)
     if (!isFound) {
 
         cout << "\n\n\t\tBook Not Found" << endl;
+    }
+}
+
+void BookHashTableByBookAuthor::emptyHashTable()
+{
+
+    for (int i = 0; i < HASH_TABLE_SIZE; ++i) {
+        this->bookAuthorTable[i] = nullptr;
     }
 }
