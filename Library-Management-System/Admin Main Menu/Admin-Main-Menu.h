@@ -26,5 +26,7 @@ public:
 
 	void updateBook();
 
+	void deleteBook();
+
 	void run();
 };
