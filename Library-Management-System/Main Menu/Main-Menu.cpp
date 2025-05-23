@@ -3,6 +3,7 @@
 
 #include "../Login-Registration/Login-Registration/Login-Registration.h"
 #include "../User Main Menu/User-Main-Menu.h"
+#include "../Admin Main Menu/Admin-Main-Menu.h"
 
 // FOR testing
 
@@ -12,53 +13,29 @@ using namespace std;
 
 void mainMenu() {
 
-	//BookHashTableByID* bookHashTableByID = new BookHashTableByID();
+	bool isAuthenticate = loginRegistration();
 
-	//bookHashTableByID->restoreBooks();
+	while (true) {
 
-	//string bookID, bookTitle, bookAuthor, summary, genre;
+		string option;
+		cout << "\n\n1. Admin." << endl
+			<< "2. User." << endl;
+		getline(cin >> ws, option);
 
-	//bookTitle = "Atomic habits";
-	//bookAuthor = "Bakar";
-	//summary = "This books helps you to replace your bad habits with good ones";
-	//genre = "Self-Improvement";
+		if (option == "1") {
 
-	//
-	//bookHashTableByID->insertBook(bookTitle, bookAuthor, summary, genre);
+			AdminMainMenu adminMainMenu;
+			adminMainMenu.run();
+		}
+		else if (option == "2") {
 
-	//bookTitle = "Money power";
-	//bookAuthor = "Abdullah";
-	//summary = "It explains power of money";
-	//genre = "Power";
+			UserMainMenu userMainMenu;
+			userMainMenu.run();
+		}
+		else {
 
-	//bookHashTableByID->insertBook(bookTitle, bookAuthor, summary, genre);
-
-	//bookHashTableByID->storeBooks();
-
-
-	UserMainMenu userMainMenu;
-	
-	userMainMenu.run();
-
-
-
-	// return true if successful
-
-	//bool isAuthenticate = loginRegistration();
-
-	//BookHashTableByID* bookHashTableByID = new BookHashTableByID();
-
-	//bookHashTableByID->read_file();
-
-	//string bookID, bookTitle, bookAuthor, summary, genre;
-
-	//bookTitle = "Atomic habits";
-	//bookAuthor = "Bakar";
-	//summary = "This books helps you to replace your bad habits with good ones";
-	//genre = "Self-Improvement";
-
-	//bookHashTableByID->addBook(bookTitle, bookAuthor, summary, genre);
-
-	//bookHashTableByID->write_file();
-	
+			cout << "\nEnter correct option" << endl;
+			break;
+		}
+	}
 }
