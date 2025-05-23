@@ -38,6 +38,7 @@ public:
 
     Book* head;
     Book* tail;
+    int totalBooksInserted;
     int totalBooks;
 
     DoublyLinkedBooks();
