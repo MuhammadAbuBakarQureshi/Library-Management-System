@@ -154,11 +154,10 @@ void UserMainMenu::run() {
 		cout << "-------------------------------------------------------------\n";
 
 		cout << " 1. List All Books\n";
-		cout << " 2. Insert Book\n";
-		cout << " 3. Find Book\n";
-		cout << " 4. Borrow Book\n";
-		cout << " 5. Return Book\n";
-		cout << " 6. Exit\n";
+		cout << " 2. Find Book\n";
+		cout << " 3. Borrow Book\n";
+		cout << " 4. Return Book\n";
+		cout << " 5. Exit\n";
 
 		cout << "-------------------------------------------------------------\n";
 
@@ -173,24 +172,21 @@ void UserMainMenu::run() {
 			bookHashTableByID->listAllBooks();
 		}
 		else if (option == "2") {
-			insertBook();
-		}
-		else if (option == "3") {
 			findBook();
 		}
-		else if (option == "4") {
+		else if (option == "3") {
 			string bookID;
 			cout << "Enter Book ID to borrow: ";
 			cin >> bookID;
 			bookHashTableByID->borrowBook(bookID);
 		}
-		else if (option == "5") {
+		else if (option == "4") {
 			string bookID;
 			cout << "Enter Book ID to return: ";
 			cin >> bookID;
 			bookHashTableByID->returnBook(bookID);
 		}
-		else if (option == "6") {
+		else if (option == "5") {
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "\nExiting... Have a great day!\n";
 			SetConsoleTextAttribute(hConsole, 15);
