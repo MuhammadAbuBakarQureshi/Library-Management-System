@@ -279,4 +279,3 @@ void AdminMainMenu::run()
 		cin.get();
 	}
 }
-
