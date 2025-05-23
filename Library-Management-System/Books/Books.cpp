@@ -335,11 +335,31 @@ bool BookHashTableByID::deleteBook(string bookID)
 
         this->doublyLinkedBooks->deleteBook(book);
         this->doublyLinkedBooks->totalBooks--;
-        this->storeBooks();
-        this->restoreBooks();
+        this->restoreBooksInTable();
         return true;
     }
 
+}
+
+void BookHashTableByID::restoreBooksInTable()
+{
+    this->emptyHashTable();
+    this->bookHashTableByBookTitle->emptyHashTable();
+    this->bookHashTableByBookAuthor->emptyHashTable();
+
+    for (Book* iterNode = this->doublyLinkedBooks->tail; iterNode; iterNode = iterNode->prev) {
+
+        iterNode->hashNextByID = nullptr;
+        iterNode->hashNextByTitle = nullptr;
+        iterNode->hashNextByAuthor = nullptr;
+    }
+
+    for (Book* newBook = this->doublyLinkedBooks->tail; newBook; newBook = newBook->prev) {
+
+        this->addBookInTable(newBook);
+        this->bookHashTableByBookTitle->addBookInTable(newBook);
+        this->bookHashTableByBookAuthor->addBookInTable(newBook);
+    }
 }
 
 void BookHashTableByID::emptyHashTable()
@@ -354,6 +374,8 @@ void BookHashTableByID::storeBooks()
     string data = "";
 
     data += to_string(doublyLinkedBooks->totalBooks);
+    data += ",\n";
+    data += to_string(doublyLinkedBooks->totalBooksInserted);
     data += ",\n";
 
     for (Book* iterNode = doublyLinkedBooks->tail; iterNode; iterNode = iterNode->prev) {
@@ -396,9 +418,9 @@ void BookHashTableByID::restoreBooks()
 
     if (file.is_open()) {
 
-        string data;
+        string data, firstLine, secondLine;
 
-        string firstLine;
+        // takes total books
 
         if (getline(file, firstLine)) {
 
@@ -407,9 +429,20 @@ void BookHashTableByID::restoreBooks()
             string totalBooks;
             getline(ss, totalBooks, ',');
 
-            doublyLinkedBooks->totalBooks = stoi(totalBooks);
+            this->doublyLinkedBooks->totalBooks = stoi(totalBooks);
         }
 
+        // takes total books inserted
+
+        if (getline(file, secondLine)) {
+
+            stringstream ss(secondLine);
+
+            string totalBooksInserted;
+            getline(ss, totalBooksInserted, ',');
+
+            this->doublyLinkedBooks->totalBooksInserted = stoi(totalBooksInserted);
+        }
 
         while (getline(file, data)) {
 
@@ -530,7 +563,6 @@ BookHashTableByBookAuthor::~BookHashTableByBookAuthor()
 
 void BookHashTableByBookAuthor::addBookInTable(Book* newBook)
 {
-
 
     int index = hash_value(newBook->bookAuthor);
     
