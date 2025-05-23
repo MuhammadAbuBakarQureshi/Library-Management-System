@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <iostream>
 
 #include "../Login-Registration/Keys/key.h"
@@ -8,11 +9,13 @@
 
 using namespace std;
 
+const int HASH_TABLE_SIZE = 100;
+
 class BookHashTableByBookAuthor {
 
 public:
 
-    Book* bookAuthorTable[20];
+    Book* bookAuthorTable[HASH_TABLE_SIZE];
 
     BookHashTableByBookAuthor();
     ~BookHashTableByBookAuthor();
@@ -20,13 +23,15 @@ public:
     void addBookInTable(Book* newBook);
 
     void searchByAuthor(string bookAuthor);
+
+    void emptyHashTable();
 };
 
 class BookHashTableByBookTitle {
 
 public:
 
-    Book* bookTitleTable[20];
+    Book* bookTitleTable[HASH_TABLE_SIZE];
 
     BookHashTableByBookTitle();
     ~BookHashTableByBookTitle();
@@ -34,6 +39,8 @@ public:
     void addBookInTable(Book* newBook);
 
     void searchByTitle(string bookTitle);
+
+    void emptyHashTable();
 };
 
 
@@ -41,7 +48,7 @@ class BookHashTableByID {
 
 public:
 
-    Book* bookIDTable[20];
+    Book* bookIDTable[HASH_TABLE_SIZE];
     DoublyLinkedBooks* doublyLinkedBooks;
     BookHashTableByBookTitle* bookHashTableByBookTitle;
     BookHashTableByBookAuthor* bookHashTableByBookAuthor;
@@ -64,6 +71,12 @@ public:
     void borrowBook(string);
 
     void returnBook(string);
+
+    void updateBook(string, string, string, string, string);
+
+    bool deleteBook(string);
+
+    void emptyHashTable();
 
     void storeBooks();
 
