@@ -5,40 +5,20 @@
 #include "../User Main Menu/User-Main-Menu.h"
 #include "../Admin Main Menu/Admin-Main-Menu.h"
 
-// FOR testing
-
-#include "../Books/Books.h"
-
 using namespace std;
 
 void mainMenu() {
 
-	AdminMainMenu adminMainMenu;
-	adminMainMenu.run();
+	bool isAdmin = loginRegistration();
 
-	//bool isAuthenticate = loginRegistration();
+	if (isAdmin) {
 
-	//while (true) {
+		AdminMainMenu adminMainMenu;
+		adminMainMenu.run();
+	}
+	else {
 
-	//	string option;
-	//	cout << "\n\n1. Admin." << endl
-	//		<< "2. User." << endl;
-	//	getline(cin >> ws, option);
-
-	//	if (option == "1") {
-
-	//		AdminMainMenu adminMainMenu;
-	//		adminMainMenu.run();
-	//	}
-	//	else if (option == "2") {
-
-	//		UserMainMenu userMainMenu;
-	//		userMainMenu.run();
-	//	}
-	//	else {
-
-	//		cout << "\nEnter correct option" << endl;
-	//		break;
-	//	}
-	//}
+		UserMainMenu userMainMenu;
+		userMainMenu.run();
+	}
 }
