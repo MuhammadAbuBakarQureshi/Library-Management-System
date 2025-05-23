@@ -8,7 +8,8 @@ Book::Book(string bookID, string bookTitle, string bookAuthor, string summary, s
     this->bookAuthor = bookAuthor;
     this->summary = summary;
     this->genre = genre;
-    this->isAvailable = isAvailable; // True by default
+    this->isAvailable = isAvailable;
+
     this->prev = nullptr;
     this->next = nullptr;
     this->hashNextByID = nullptr;
@@ -54,4 +55,28 @@ Book* DoublyLinkedBooks::insertBook(string bookID, string bookTitle, string book
     }
 
     return newBook;
+}
+
+bool DoublyLinkedBooks::deleteBook(Book* book)
+{
+    if (book->prev == nullptr) { // For head
+
+        book->next->prev = nullptr;
+        this->head = book->next;
+        delete book;
+        return true;
+    }
+
+    if (book->next == nullptr) { // For tail
+
+        book->prev->next = nullptr;
+        this->tail = book->prev;
+        delete book;
+        return true;
+    }
+
+    book->prev->next = book->next;
+    book->next->prev = book->prev;
+    delete book;
+    return true;
 }
