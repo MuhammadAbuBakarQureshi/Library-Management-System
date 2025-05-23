@@ -21,7 +21,7 @@ bool loginRegistration() {
 
 	cout << "\n\n\t\t\tWelcome\n" << endl;
 
-	bool flag = false;
+	bool flag = false, isAdmin = false;
 
 	while (!flag) {
 
@@ -39,8 +39,10 @@ bool loginRegistration() {
 
 			cout << "\n\n\t\t\tAccount Login" << endl;
 
-			flag = login();
+			pair<bool, bool> loginInformation = login();
 
+			flag = loginInformation.first;
+			isAdmin = loginInformation.second;
 		}
 		else if (option == "n" || option == "no") {
 			
@@ -57,6 +59,7 @@ bool loginRegistration() {
 			cout << "Enter correct option" << endl;
 		}
 	}
-	
-	return flag;
+
+	if (isAdmin) return true;
+	return false;
 }
