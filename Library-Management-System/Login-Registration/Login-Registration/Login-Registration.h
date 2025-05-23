@@ -1,7 +1,9 @@
 #pragma once
 
+using namespace std;
+
 int registration();
 
-bool login();
+pair<bool, bool> login();
 
 bool loginRegistration();
