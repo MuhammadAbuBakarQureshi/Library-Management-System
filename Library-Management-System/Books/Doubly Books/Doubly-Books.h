@@ -24,6 +24,8 @@ public:
     Book* hashNextByTitle;
     Book* hashNextByAuthor;
 
+    
+
     // Constructor
 
     Book(string bookID, string bookTitle, string bookAuthor, string summary, string genre, bool);
@@ -42,5 +44,5 @@ public:
     ~DoublyLinkedBooks();
 
     Book* insertBook(string, string, string, string, string, bool);
-
+    bool deleteBook(Book*);
 };
