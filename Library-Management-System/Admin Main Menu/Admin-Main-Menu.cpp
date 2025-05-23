@@ -144,12 +144,7 @@ void AdminMainMenu::updateBook()
 
 	Book* book = bookHashTableByID->searchByID(bookID);
 
-	if (!book) {
-		SetConsoleTextAttribute(hConsole, 12); // Red
-		std::cout << "\n? Book not found.\n";
-		SetConsoleTextAttribute(hConsole, 15); // Reset
-		return;
-	}
+	if (!book) return;
 
 	SetConsoleTextAttribute(hConsole, 11); // Bright Cyan
 	std::cout << "\n\n" << std::setw(45) << "Update Book Form\n\n";
@@ -189,11 +184,33 @@ void AdminMainMenu::updateBook()
 	std::cout << "------------------------------------------------------------\n";
 
 	// Call your update logic here
-	// bookHashTableByID->updateBook(bookID, bookTitle, bookAuthor, genre, summary);
+	this->bookHashTableByID->updateBook(bookID, bookTitle, bookAuthor, genre, summary);
 
 	SetConsoleTextAttribute(hConsole, 10); // Green
 	std::cout << "\nBook updated successfully!\n";
 	SetConsoleTextAttribute(hConsole, 15); // Reset
+}
+
+void AdminMainMenu::deleteBook()
+{
+	std::string bookID;
+
+	std::cout << "\n\n\t\t\tDelete a Book by ID\n";
+	std::cout << "\t\t\t-----------------------\n";
+
+	std::cout << "\t\t\tEnter Book ID to delete: ";
+	std::cin >> bookID;
+
+	// Assuming deleteBook returns true if successful
+	bool success = bookHashTableByID->deleteBook(bookID);
+
+	if (success) {
+		std::cout << "\n\t\t\tBook with ID \"" << bookID << "\" has been successfully deleted.\n";
+	}
+	else {
+		std::cout << "\n\t\t\tBook with ID \"" << bookID << "\" was not found.\n";
+	}
+
 }
 
 void AdminMainMenu::run()
@@ -208,7 +225,7 @@ void AdminMainMenu::run()
 
 		// Set color to bright cyan
 		SetConsoleTextAttribute(hConsole, 11);
-		cout << "\n\n" << setw(50) << "User Main Menu" << "\n\n";
+		cout << "\n\n" << setw(50) << "Admin Main Menu" << "\n\n";
 
 		// Reset color
 		SetConsoleTextAttribute(hConsole, 15);
@@ -243,10 +260,7 @@ void AdminMainMenu::run()
 			this->updateBook();
 		}
 		else if (option == "5") {
-			string bookID;
-			cout << "Enter Book ID to return: ";
-			cin >> bookID;
-			bookHashTableByID->returnBook(bookID);
+			this->deleteBook();
 		}
 		else if (option == "6") {
 			SetConsoleTextAttribute(hConsole, 10);
