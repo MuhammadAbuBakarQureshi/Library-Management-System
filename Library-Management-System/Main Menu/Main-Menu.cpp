@@ -13,29 +13,32 @@ using namespace std;
 
 void mainMenu() {
 
-	bool isAuthenticate = loginRegistration();
+	AdminMainMenu adminMainMenu;
+	adminMainMenu.run();
 
-	while (true) {
+	//bool isAuthenticate = loginRegistration();
 
-		string option;
-		cout << "\n\n1. Admin." << endl
-			<< "2. User." << endl;
-		getline(cin >> ws, option);
+	//while (true) {
 
-		if (option == "1") {
+	//	string option;
+	//	cout << "\n\n1. Admin." << endl
+	//		<< "2. User." << endl;
+	//	getline(cin >> ws, option);
 
-			AdminMainMenu adminMainMenu;
-			adminMainMenu.run();
-		}
-		else if (option == "2") {
+	//	if (option == "1") {
 
-			UserMainMenu userMainMenu;
-			userMainMenu.run();
-		}
-		else {
+	//		AdminMainMenu adminMainMenu;
+	//		adminMainMenu.run();
+	//	}
+	//	else if (option == "2") {
 
-			cout << "\nEnter correct option" << endl;
-			break;
-		}
-	}
+	//		UserMainMenu userMainMenu;
+	//		userMainMenu.run();
+	//	}
+	//	else {
+
+	//		cout << "\nEnter correct option" << endl;
+	//		break;
+	//	}
+	//}
 }
