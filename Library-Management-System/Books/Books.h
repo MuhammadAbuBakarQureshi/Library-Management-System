@@ -76,6 +76,8 @@ public:
 
     bool deleteBook(string);
 
+    void restoreBooksInTable();
+
     void emptyHashTable();
 
     void storeBooks();
