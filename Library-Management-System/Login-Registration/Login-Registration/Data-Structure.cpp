@@ -14,15 +14,17 @@ public:
 	string user_email;
 	string password;
 	string salt;
+    bool isAdmin;
 	Node* next;
 
 	// Constructor
 
-	Node(string user_email, string password, string salt) {
+	Node(string user_email, string password, string salt, bool isAdmin) {
 
 		this->user_email = user_email;
 		this->password = password;
 		this->salt = salt;
+        this->isAdmin = isAdmin;
 		next = nullptr;
 	}
 };
@@ -33,10 +35,9 @@ public:
 
 	Node* data_map[20];
 
-
 	void add_account(string user_email, string password, string salt) {
 
-		Node* new_account = new Node(user_email, password, salt);
+		Node* new_account = new Node(user_email, password, salt, 0);
 
 		int index = hash_value(user_email);
 
@@ -56,22 +57,22 @@ public:
 		}
 	}
 
-	bool check_email(string user_email) {
+    bool check_email(string user_email) {
 
-		int index = hash_value(user_email);
+        int index = hash_value(user_email);
 
-		if (data_map[index] == nullptr) return true;
+        if (data_map[index] == nullptr) return true;
 
-		for (Node* iterNode = data_map[index]; iterNode; iterNode = iterNode->next) {
+        for (Node* iterNode = data_map[index]; iterNode; iterNode = iterNode->next) {
 
-			if (iterNode->user_email == user_email) {
+            if (iterNode->user_email == user_email) {
 
-				return false;
-			}
-		}
+                return false;
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
     bool check_password(string user_email, string password_hash) {
 
@@ -123,6 +124,8 @@ public:
                 data += ll_iterNode->password;
                 data += ",";
                 data += ll_iterNode->salt;
+                data += ',';
+                data += (ll_iterNode->isAdmin ? "true" : "false");
                 if (ll_iterNode->next == nullptr) {
 
                     data += ",nullptr\n";
@@ -139,7 +142,7 @@ public:
 
         fstream file;
 
-        file.open("data_base.csv", ios::out);
+        file.open("DataBase.txt", ios::out);
 
         if (file.is_open()) {
 
@@ -152,7 +155,7 @@ public:
 
         fstream file;
 
-        file.open("data_base.csv", ios::in);
+        file.open("DataBase.txt", ios::in);
 
         if (file.is_open()) {
 
@@ -169,15 +172,16 @@ public:
                 }
                 else {
 
-                    string email, password, salt, check;
+                    string email, password, salt, check, isAdmin;
 
                     stringstream ss(data);
 
                     getline(ss, email, ',');
                     getline(ss, password, ',');
                     getline(ss, salt, ',');
+                    getline(ss, isAdmin, ',');
 
-                    Node* new_account = new Node(email, password, salt);
+                    Node* new_account = new Node(email, password, salt, ((isAdmin == "true") ? 1 : 0));
 
                     getline(ss, check);
 
@@ -204,6 +208,26 @@ public:
             }
         }
 
+    }
+
+    bool isAdmin(string userEmail) {
+
+        int index = hash_value(userEmail);
+
+        if (data_map[index] == nullptr) return true;
+
+        for (Node* iterNode = data_map[index]; iterNode; iterNode = iterNode->next) {
+
+            if (iterNode->user_email == userEmail) {
+
+                if (iterNode->isAdmin) {
+
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 };
 
@@ -237,7 +261,7 @@ int registration() {
 	return 0;
 }
 
-bool login() {
+pair<bool, bool> login() {
 
     hash_table->read_file();
 
@@ -249,7 +273,7 @@ bool login() {
 
 		cout << "There is no account registered on this email\n" << endl;
 		system("pause");
-		return false;
+        return make_pair(false, false);
 	}
 
     flag = false;
@@ -271,5 +295,7 @@ bool login() {
 
     print_message("Login Successfully");
 
-	return true;
+    if (hash_table->isAdmin(user_email)) return make_pair(flag, true);
+
+    return make_pair(flag, false);
 }
