@@ -21,8 +21,6 @@ string toLower(string str) {
     return lower;
 }
 
-
-
 BookHashTableByID::BookHashTableByID()
 {
     this->doublyLinkedBooks = new DoublyLinkedBooks();
@@ -87,6 +85,21 @@ void BookHashTableByID::addBookInTable(Book* newBook)
 //
 //    return true;
 //}
+
+void BookHashTableByID::sortByTitle()
+{
+    this->doublyLinkedBooks->sortByTitleDescending();
+}
+
+void BookHashTableByID::sortByAuthor() {
+
+    this->doublyLinkedBooks->sortByAuthorDescending();
+}
+
+void BookHashTableByID::sortByID() {
+
+    this->doublyLinkedBooks->sortByIDDescending();
+}
 
 void BookHashTableByID::listAllBooks()
 {
