@@ -3,7 +3,6 @@
 #include <sstream>
 #include <fstream>
 
-
 using namespace std;
 
 class Book {
@@ -30,7 +29,6 @@ public:
 
     Book(string bookID, string bookTitle, string bookAuthor, string summary, string genre, bool);
 };
-
 
 class DoublyLinkedBooks {
 
@@ -66,6 +64,4 @@ public:
     Book* mergeSortByID(Book*);
 
     Book* mergeByIDDescending(Book* a, Book* b);
-
-
 };
