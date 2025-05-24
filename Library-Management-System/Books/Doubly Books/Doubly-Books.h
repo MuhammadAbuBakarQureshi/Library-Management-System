@@ -46,4 +46,26 @@ public:
 
     Book* insertBook(string, string, string, string, string, bool);
     bool deleteBook(Book*);
+
+    Book* mergeSort(Book* start);
+
+    Book* mergeDescending(Book* a, Book* b);
+
+    Book* getMiddle(Book* start);
+
+    void sortByTitleDescending();
+
+    Book* mergeSortByAuthor(Book* start);
+
+    Book* mergeByAuthorDescending(Book* a, Book* b);
+
+    void sortByAuthorDescending();
+
+    void sortByIDDescending();
+
+    Book* mergeSortByID(Book*);
+
+    Book* mergeByIDDescending(Book* a, Book* b);
+
+
 };
