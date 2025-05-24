@@ -157,7 +157,10 @@ void UserMainMenu::run() {
 		cout << " 2. Find Book\n";
 		cout << " 3. Borrow Book\n";
 		cout << " 4. Return Book\n";
-		cout << " 5. Exit\n";
+		cout << " 5. Sort Books By Title\n";
+		cout << " 6. Sort Books By Author\n";
+		cout << " 7. Sort Books By Author\n";
+		cout << " 8. Exit\n";
 
 		cout << "-------------------------------------------------------------\n";
 
@@ -185,8 +188,15 @@ void UserMainMenu::run() {
 			cout << "Enter Book ID to return: ";
 			cin >> bookID;
 			bookHashTableByID->returnBook(bookID);
+		}else if (option == "5") {
+			this->bookHashTableByID->sortByTitle();
+		}else if (option == "6"){
+			this->bookHashTableByID->sortByAuthor();
 		}
-		else if (option == "5") {
+		else if (option == "7") {
+			this->bookHashTableByID->sortByID();
+		}
+		else if (option == "8") {
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "\nExiting... Have a great day!\n";
 			SetConsoleTextAttribute(hConsole, 15);
