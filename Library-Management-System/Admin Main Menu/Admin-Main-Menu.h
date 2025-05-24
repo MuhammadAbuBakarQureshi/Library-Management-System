@@ -28,5 +28,7 @@ public:
 
 	void deleteBook();
 
+	void sort();
+
 	void run();
 };
