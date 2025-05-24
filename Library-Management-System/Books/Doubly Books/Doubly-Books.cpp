@@ -99,7 +99,6 @@ Book* DoublyLinkedBooks::mergeSort(Book* start) {
     return mergeDescending(left, right);
 }
 
-// Merge two sorted halves in descending order
 Book* DoublyLinkedBooks::mergeDescending(Book* a, Book* b) {
     if (!a) return b;
     if (!b) return a;
@@ -121,7 +120,6 @@ Book* DoublyLinkedBooks::mergeDescending(Book* a, Book* b) {
     return result;
 }
 
-// Find middle using slow and fast pointer
 Book* DoublyLinkedBooks::getMiddle(Book* start) {
     if (!start) return start;
 
