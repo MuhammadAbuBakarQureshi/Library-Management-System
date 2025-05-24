@@ -16,5 +16,7 @@ public:
 
 	void findBook();
 
+	void sort();
+
 	void run();
 };
