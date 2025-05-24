@@ -213,6 +213,64 @@ void AdminMainMenu::deleteBook()
 
 }
 
+void AdminMainMenu::sort()
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	bool isRunning = true;
+
+	while (isRunning) {
+		system("cls");
+
+		SetConsoleTextAttribute(hConsole, 11); // Bright cyan
+		cout << string(50, ' ') << "Sort Books\n\n";
+
+		SetConsoleTextAttribute(hConsole, 15); // Reset color
+		cout << "-------------------------------------------------------------\n";
+		cout << " 1. Sort by ID\n";
+		cout << " 2. Sort by Title\n";
+		cout << " 3. Sort by Author\n";
+		cout << " 4. Exit\n";
+		cout << "-------------------------------------------------------------\n";
+
+		cout << "\nEnter your option: ";
+		string option;
+		cin >> option;
+
+		cin.ignore(); // flush newline
+		system("cls");
+
+		if (option == "1") {
+
+			this->bookHashTableByID->sortByID();
+		}
+		else if (option == "2") {
+
+			this->bookHashTableByID->sortByTitle();
+		}
+		else if (option == "3") {
+
+			this->bookHashTableByID->sortByAuthor();
+		}
+		else if (option == "4") {
+			SetConsoleTextAttribute(hConsole, 10); // Green
+			cout << "\nExiting Search Menu...\n";
+			SetConsoleTextAttribute(hConsole, 15); // Reset
+			isRunning = false;
+
+		}
+		else {
+			SetConsoleTextAttribute(hConsole, 12); // Red
+			cout << "\nInvalid option. Please try again.\n";
+			SetConsoleTextAttribute(hConsole, 15); // Reset
+		}
+
+		if (isRunning) {
+			cout << "\nPress Enter to continue...";
+			cin.get();
+		}
+	}
+}
+
 void AdminMainMenu::run()
 {
 
@@ -236,7 +294,8 @@ void AdminMainMenu::run()
 		cout << " 3. Insert Book\n";
 		cout << " 4. Update Book\n";
 		cout << " 5. Delete Book\n";
-		cout << " 6. Exit\n";
+		cout << " 6. Sort Books\n";
+		cout << " 7. Exit\n";
 
 		cout << "-------------------------------------------------------------\n";
 
@@ -261,8 +320,10 @@ void AdminMainMenu::run()
 		}
 		else if (option == "5") {
 			this->deleteBook();
+		}else if (option == "6"){
+			this->sort();
 		}
-		else if (option == "6") {
+		else if (option == "7") {
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "\nExiting... Have a great day!\n";
 			SetConsoleTextAttribute(hConsole, 15);
