@@ -5,6 +5,8 @@
 #include "../Registration/Registration.h"
 #include "../Keys/key.h"
 
+const int HASH_TABLE_SIZE = 100;
+
 using namespace std;
 
 class Node {
@@ -33,7 +35,7 @@ class HashTable {
 
 public:
 
-	Node* data_map[20];
+	Node* data_map[HASH_TABLE_SIZE];
 
 	void add_account(string user_email, string password, string salt) {
 
@@ -105,7 +107,7 @@ public:
 
         string data = "";
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < HASH_TABLE_SIZE; i++) {
 
             Node* iterNode = data_map[i];
 
