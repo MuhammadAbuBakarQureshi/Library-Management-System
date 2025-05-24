@@ -98,9 +98,7 @@ public:
         for (Node* iterNode = data_map[index]; iterNode; iterNode = iterNode->next) {
 
             if (iterNode->user_email == email) return iterNode->salt;
-
         }
-
     }
 
     void write_file() {
