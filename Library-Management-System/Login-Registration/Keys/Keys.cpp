@@ -2,6 +2,9 @@
 #include <string>
 #include <time.h>
 
+
+const int HASH_TABLE_SIZE = 100;
+
 using namespace std;
 
 int hash_value(string key) {
@@ -11,7 +14,7 @@ int hash_value(string key) {
 	for (int i = 0; i < key.length(); i++) {
 
 		int ascii_value = int(key[i]);
-		hash = (hash + (ascii_value * 23)) % 20;
+		hash = (hash + (ascii_value * 23)) % HASH_TABLE_SIZE;
 	}
 
 	return hash;
