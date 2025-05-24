@@ -62,6 +62,12 @@ public:
    
     //bool checkID(string bookID);
 
+    void sortByTitle();
+
+    void sortByAuthor();
+
+    void sortByID();
+
     void listAllBooks();
 
     void listBook(Book*);
