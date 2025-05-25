@@ -43,7 +43,6 @@ public:
     void emptyHashTable();
 };
 
-
 class BookHashTableByID {
 
 public:
