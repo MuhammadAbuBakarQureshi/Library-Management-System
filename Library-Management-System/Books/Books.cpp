@@ -48,8 +48,6 @@ void BookHashTableByID::insertBook(string bookTitle, string bookAuthor, string s
 void BookHashTableByID::addBookInTable(Book* newBook)
 {
 
-    //Book* newBook = doublyLinkedBooks->insertBook("needed", bookTitle, bookAuthor, summary, genre);
-    
     int index = hash_value(newBook->bookID);
 
     if (bookIDTable[index] == nullptr) {
