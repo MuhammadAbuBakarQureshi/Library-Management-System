@@ -194,7 +194,7 @@ void UserMainMenu::sort()
 	}
 }
 
-void UserMainMenu::run() {
+void UserMainMenu::execute() {
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
