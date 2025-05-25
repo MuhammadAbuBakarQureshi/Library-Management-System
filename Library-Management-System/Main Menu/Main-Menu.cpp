@@ -14,11 +14,11 @@ void mainMenu() {
 	if (isAdmin) {
 
 		AdminMainMenu adminMainMenu;
-		adminMainMenu.run();
+		adminMainMenu.execute();
 	}
 	else {
 
 		UserMainMenu userMainMenu;
-		userMainMenu.run();
+		userMainMenu.execute();
 	}
 }
