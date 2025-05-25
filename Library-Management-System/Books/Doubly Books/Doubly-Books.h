@@ -9,7 +9,6 @@ class Book {
 
 public:
 
-
     string bookID;
     string bookTitle;
     string bookAuthor;
@@ -22,8 +21,6 @@ public:
     Book* hashNextByID;
     Book* hashNextByTitle;
     Book* hashNextByAuthor;
-
-    
 
     // Constructor
 
