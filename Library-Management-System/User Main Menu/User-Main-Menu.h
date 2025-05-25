@@ -18,5 +18,5 @@ public:
 
 	void sort();
 
-	void run();
+	void execute();
 };
