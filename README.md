@@ -89,3 +89,9 @@ This is a C++-based Library Management System designed for efficient book manage
   - Singly Linked List (for collision resolution)
   - Hash Tables
 - Terminal-based UI using console I/O
+
+---
+
+## Contribution
+
+You can contribute if you want. Feel free to improve features, fix bugs, or add new functionalities.
