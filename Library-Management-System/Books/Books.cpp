@@ -326,12 +326,13 @@ void BookHashTableByID::returnBook(string bookID)
 void BookHashTableByID::updateBook(string bookID, string bookTitle, string bookAuthor, string summary, string genre)
 {
     
-    Book* book = this->searchByID(bookID);
+    this->deleteBook(bookID);
 
-    book->bookTitle = bookTitle;
-    book->bookAuthor = bookAuthor;
-    book->summary = summary;
-    book->genre = genre;
+    Book* newBook = doublyLinkedBooks->insertBook(bookID, bookTitle, bookAuthor, summary, genre, "1");
+
+    this->addBookInTable(newBook);
+    this->bookHashTableByBookTitle->addBookInTable(newBook);
+    this->bookHashTableByBookAuthor->addBookInTable(newBook);
 }
 
 bool BookHashTableByID::deleteBook(string bookID)
